@@ -27,6 +27,7 @@ class CreateCouponsTable extends Migration
             $table->integer('count')->nullable(); // if is limited only
             $table->integer('coupon_category');
             $table->integer('min_age')->default(0);
+            $table->integer('views');
             $table->timestamps();
         });
     }
