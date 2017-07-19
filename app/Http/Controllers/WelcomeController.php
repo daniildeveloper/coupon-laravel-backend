@@ -41,13 +41,13 @@ class WelcomeController extends Controller
      */
     public function showIndexPage(Request $request)
     {
-        if ($request['ref'] != null) {
-            if (Auth::user() !== null) {
-                Session::put('ref', $request['ref']);
-                // dd(Session::get('ref'));
-            }
+        // if ($request['ref'] != null) {
+        //     if (Auth::user() !== null) {
+        //         Session::put('ref', $request['ref']);
+        //         // dd(Session::get('ref'));
+        //     }
 
-        }
+        // }
 
         $products = DB::table('coupons')->where(
             [

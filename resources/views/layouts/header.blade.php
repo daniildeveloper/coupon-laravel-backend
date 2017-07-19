@@ -70,7 +70,7 @@
                         {{ csrf_field() }}
                     </form>
                 </li>
-                
+
               @endif
             </ul>
           </div>
@@ -104,7 +104,7 @@
         <div class="checkbox">
         <label>
           <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>Запомнить меня</label>
-        </div> 
+        </div>
         <input class="btn btn-primary" type="submit" value="Войти"></form>
       <ul class="dialog-alt-links">
         <li><a class="popup-text" href="#register-dialog" data-effect="mfp-zoom-out">Еще не с нами?</a></li>
@@ -116,20 +116,20 @@
     {{-- register --}}
     <div class="mfp-with-anim mfp-hide mfp-dialog clearfix" id="register-dialog"><i class="fa fa-edit dialog-icon"></i>
       <h3>Регистрация новго пользователя</h3>
-      
+
       <form class="dialog-form" method="POST" action="{{ route('register') }}">
       {{csrf_field()}}
       <div class="form-group">
-        <label>Имя</label> 
+        <label>Имя</label>
           <input class="form-control" type="text" placeholder="Имя" name="name" value="{{ old('name') }}" required>
           @if ($errors->has('name'))
               <span class="help-block">
                   <strong>{{ $errors->first('name') }}</strong>
-              </span>   
+              </span>
           @endif
         </div>
         <div class="form-group">
-        <label>почта</label> 
+        <label>почта</label>
           <input class="form-control" type="email" placeholder="Почта" name="email" value="{{ old('email') }}">
           @if ($errors->has('email'))
               <span class="help-block">
@@ -138,7 +138,7 @@
           @endif
         </div>
         <div class="form-group">
-          <label>пароль</label> 
+          <label>пароль</label>
           <input class="form-control" type="password" placeholder="Пароль еще раз" name="password" required>
           @if ($errors->has('password'))
               <span class="help-block">
@@ -158,7 +158,7 @@
         <div class="checkbox">
           <label>
             <input type="checkbox">Подписаться на обновления и предложения</label>
-          </div> 
+          </div>
           <input class="btn btn-primary" type="submit" value="Зарегистрироваться">
       </form>
       <ul class="dialog-alt-links">
@@ -183,7 +183,7 @@
             </div>
           </div>
           <div class="col-md-3 clearfix">
-            <label><i class="fa fa-map-marker"></i> 
+            <label><i class="fa fa-map-marker"></i>
               <span>В</span>
             </label>
             <div class="search-area-division search-area-division-location">
