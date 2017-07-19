@@ -19,8 +19,8 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->text('address');
             $table->string('primary_phone');
-            $table->string('second_phone');
-            $table->string('logo');
+            $table->string('second_phone')->nullable();
+            $table->string('logo')->default('images/logo-inline.png');
             $table->string('second_image')->nullable();
             $table->integer('company_type');
             // $table->integer

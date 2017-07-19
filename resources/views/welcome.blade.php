@@ -17,17 +17,19 @@ CouponLand
         @foreach($products as $product)
         
           <div class="col-md-4">
-            <div class="product-thumb"  style="border: 5px solid #FEC52E;">
-              <div class="hit">
-                <div class="hit-text">
-                  Хиты
-                </div>
-              </div>
-              <header class="product-header"><img style="height: 260px" src="/public/storage/{{$product->image}}" alt="{{$product->title}}" title="{{$product->title}}">
+            <div class="product-thumb"  @if ($product->is_border) style="border: 5px solid #FEC52E; @endif ">
+                @if($product->is_hit != 0)
+                  <div class="hit">
+                    <div class="hit-text">
+                      Хит
+                    </div>
+                  </div>
+                @endif
+              <header class="product-header"><img style="height: 260px" src="{{$product->image}}" alt="{{$product->title}}" title="{{$product->title}}">
                 <div class="product-quick-view">
                   <a class="fa fa-eye popup-text" href="#product-quick-view-dialog-{{$product->id}}" data-effect="mfp-move-from-top" data-toggle="tooltip" data-placement="top" title="Посмотреть"></a>
                 </div>
-                <div class="product-secondary-image"><img style="height: 260px" src="/public/storage/{{$product->carousel_1}}" alt="{{$product->title}}" title="{{$product->title}}"></div>
+                {{-- <div class="product-secondary-image"><img style="height: 260px" src="/public/storage/{{$product->carousel_1}}" alt="{{$product->title}}" title="{{$product->title}}"></div> --}}
               </header>
               <div class="product-inner">
                 <ul class="icon-group icon-list-rating icon-list-non-rated" title="not rated yet">
@@ -43,7 +45,7 @@ CouponLand
                   <ul class="product-price-list">
                     {{-- <li><span class="product-price">500тг</span></li>
                     <li><span class="product-old-price">1000тг</span></li> --}}
-                    <li><span class="product-save">Скидка {{$product->profit_all}}%</span></li>
+                    {{-- <li><span class="product-save">Скидка {{$product->profit_all}}%</span></li> --}}
                   </ul>
                   <ul class="product-actions-list">
                     <li><a class="btn btn-sm" href="{{route("shop.to-cart", ["id" => $product->id])}}"><i class="fa fa-shopping-cart"></i> В корзину</a></li>
@@ -58,7 +60,7 @@ CouponLand
           {{-- quick view dialog --}}
         <div class="mfp-with-anim mfp-hide mfp-dialog mfp-dialog-big clearfix" id="product-quick-view-dialog-{{$product->id}}">
           <div class="row">
-            <div class="col-md-7">
+           {{--  <div class="col-md-7">
               <div class="fotorama" data-nav="thumbs" data-allowfullscreen="1" data-thumbheight="100" data-thumbwidth="100">
                 <img src="/public/storage/{{$product->image}}" alt="{{$product->title}}" title="{{$product->title}}" 
                 style="width: 200px">
@@ -77,7 +79,7 @@ CouponLand
                 @endif
               </div>
             </div>
-
+ --}}
             <div class="col-md-5">
               <ul class="icon-group icon-list-rating text-color" title="4.5/5 rating">
                 <li><i class="fa fa-star"></i></li>
