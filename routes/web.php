@@ -47,6 +47,20 @@ Route::group(["prefix" => "shop"], function () {
     });
 });
 
+Route::group(['prefix' => 'c'], function () {
+    Route::get('/', 'CouponController@showAllCoupons')->name('c-all');
+    Route::get('/add', 'CompanyController@showNewCouponForm')->name('c-add');
+    Route::post('/new', 'CompanyController@createCoupon')->name('c-new');
+    Route::get("/c/{cat}", "WelcomeController@showCategorie")->name("category");
+    Route::get('/{id}', "WelcomeController@showSingleCoupon");
+});
+
+Route::group(['prefix' => 'company'], function () {
+    Route::get('new', 'WelcomeController@showRegisterCompanyView');
+    Route::post('add', 'WelcomeController@registerCompany')->name('company-reg');
+    Route::get('my', "CompanyController@showMyCompany")->name('my-company');
+});
+
 Route::get('search', 'WelcomeController@search')->name("search");
 Route::get("blog", "WelcomeController@blog")->name('blog');
 Route::get("faq", 'WelcomeController@faq')->name("faq");

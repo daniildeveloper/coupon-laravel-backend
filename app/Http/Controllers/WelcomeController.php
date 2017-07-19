@@ -7,7 +7,7 @@ use App\Company as Seller;
 use App\CompanyType as Type;
 use App\Coupon as Product;
 use App\FaqQuest as Quest;
-use App\Model\CouponCategory;
+use App\Model\CouponsCategory;
 use App\Views;
 use Carbon\Carbon;
 use Illuminate\Http\File;
@@ -21,7 +21,7 @@ class WelcomeController extends Controller
     protected $coupon_categories;
     public function __construct()
     {
-        $this->coupon_categories = CouponCategory::all();
+        $this->coupon_categories = CouponsCategory::all();
 
         // russisanify
         Carbon::setLocale("ru");

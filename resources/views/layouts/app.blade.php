@@ -24,6 +24,10 @@
 <body>
     @include('layouts.header')
 
+    {{-- All content goes here --}}
+    @yield('content')
+    {{-- end content --}}
+
     <!-- Scripts -->
     <script src="/js/app.js"></script>
 </body>
