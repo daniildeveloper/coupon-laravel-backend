@@ -1,95 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section("title")
+CouponLand
+@endsection
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
+@section('content')
+<main>
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      {{-- @include("layouts.sidebar") --}}
+    </div>
+    <div class="col-md-9">
+      <div class="gap gap-small"></div>
+      <div class="row row-wrap">
+        @foreach($products as $product)
+        
+          <div class="col-md-4">
+            <div class="product-thumb"  style="border: 5px solid #FEC52E;">
+              <div class="hit">
+                <div class="hit-text">
+                  Хиты
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+              </div>
+              <header class="product-header"><img style="height: 260px" src="/public/storage/{{$product->image}}" alt="{{$product->title}}" title="{{$product->title}}">
+                <div class="product-quick-view">
+                  <a class="fa fa-eye popup-text" href="#product-quick-view-dialog-{{$product->id}}" data-effect="mfp-move-from-top" data-toggle="tooltip" data-placement="top" title="Посмотреть"></a>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="product-secondary-image"><img style="height: 260px" src="/public/storage/{{$product->carousel_1}}" alt="{{$product->title}}" title="{{$product->title}}"></div>
+              </header>
+              <div class="product-inner">
+                <ul class="icon-group icon-list-rating icon-list-non-rated" title="not rated yet">
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                </ul>
+                <h5 class="product-title">{{$product->title}}</h5>
+                <p class="product-desciption">{!!$product->short_description!!}</p>
+                <div class="product-meta">
+                  <ul class="product-price-list">
+                    {{-- <li><span class="product-price">500тг</span></li>
+                    <li><span class="product-old-price">1000тг</span></li> --}}
+                    <li><span class="product-save">Скидка {{$product->profit_all}}%</span></li>
+                  </ul>
+                  <ul class="product-actions-list">
+                    <li><a class="btn btn-sm" href="{{route("shop.to-cart", ["id" => $product->id])}}"><i class="fa fa-shopping-cart"></i> В корзину</a></li>
+                    <li><button class="btn btn-sm " data-target="#email" data-toggle="modal">Быстрый заказ</button></li>
+                    {{-- <li><a class="btn btn-sm"><i class="fa fa-bars"></i> Больше</a></li> --}}
+                  </ul>
                 </div>
+              </div>
             </div>
+          </div>
+
+          {{-- quick view dialog --}}
+        <div class="mfp-with-anim mfp-hide mfp-dialog mfp-dialog-big clearfix" id="product-quick-view-dialog-{{$product->id}}">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="fotorama" data-nav="thumbs" data-allowfullscreen="1" data-thumbheight="100" data-thumbwidth="100">
+                <img src="/public/storage/{{$product->image}}" alt="{{$product->title}}" title="{{$product->title}}" 
+                style="width: 200px">
+                @if($product->carousel_1)
+                  <img src="/public/storage/{{$product->carousel_1}}" alt="{{$product->title}}" title="{{$product->title}}"> 
+                @endif
+                
+                @if($product->carousel_2)
+                  <img src="/public/storage/{{$product->carousel_2}}" alt="{{$product->title}}" title="{{$product->title}}"> 
+                @endif
+                @if($product->carousel_3)
+                  <img src="/public/storage/{{$product->carousel_3}}" alt="{{$product->title}}" title="{{$product->title}}"> 
+                @endif
+                @if($product->carousel_4)
+                  <img src="/public/storage/{{$product->carousel_4}}" alt="{{$product->title}}" title="{{$product->title}}"> 
+                @endif
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <ul class="icon-group icon-list-rating text-color" title="4.5/5 rating">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-half-empty"></i></li>
+              </ul><small><a class="text-muted" href="#">оценили 4 купивших</a></small>
+              <h3>{{$product->title}}</h3>
+              <div>
+                {!! $product->description !!}
+              </div>
+              <p>До конца акции: <span id="countdown{{$product->id}}"></span></p>
+              <p></p>
+              <script>
+
+                
+              </script>
+            </div>
+          </div>
+          {{-- <hr><a class="btn btn-primary" href="#">Больше</a> --}}
         </div>
-    </body>
-</html>
+        {{-- end dialog --}}
+
+        <div class="modal fade" id="email" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <div class="modal-dialog" role="document">
+            <form action="{{url('/shop/mailorder/new/' . $product->id)}}" method="GET">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Быстрый заказ</h4>
+              </div>
+            <div class="modal-body">
+                
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">Email отправителя:</label>
+                <input type="email" name="email" class="form-control" id="recipient-name">
+              </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="submit" class="btn btn-primary">Купить сейчас</button>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+@endsection
+
+@section("scripts")
+  <script src="{{asset("vendors/jquery.countdown/dist/jquery.countdown.js")}}">
+    
+  </script>
+
+  
+  <script>
+    window.onload = function() {
+      @foreach($products as $product)
+        $("#countdown{{$product->id}}").countdown("{{\Carbon\Carbon::parse($product->available_until)->format("Y/m/d")}}", function(event) {
+            $(this).text(event.strftime("%D дней %H:%M:%S"));
+        })
+      @endforeach
+    }
+  </script>
+
+@endsection 

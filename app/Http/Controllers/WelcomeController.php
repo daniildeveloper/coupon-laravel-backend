@@ -6,15 +6,14 @@ use App\City;
 use App\Company as Seller;
 use App\CompanyType as Type;
 use App\Coupon as Product;
-use App\CouponCategories;
 use App\FaqQuest as Quest;
+use App\Model\CouponCategory;
 use App\Views;
 use Carbon\Carbon;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class WelcomeController extends Controller
@@ -22,7 +21,7 @@ class WelcomeController extends Controller
     protected $coupon_categories;
     public function __construct()
     {
-        $this->coupon_categories = CouponCategories::all();
+        $this->coupon_categories = CouponCategory::all();
 
         // russisanify
         Carbon::setLocale("ru");
@@ -39,7 +38,7 @@ class WelcomeController extends Controller
      * @param  Request $request [description]
      * @return [type]           [description]
      */
-    public function showIndexPage(Request $request)
+    public function index(Request $request)
     {
         // if ($request['ref'] != null) {
         //     if (Auth::user() !== null) {
@@ -52,7 +51,7 @@ class WelcomeController extends Controller
         $products = DB::table('coupons')->where(
             [
                 ["is_show", 1],
-                ["available_until_timestamp", '>=', Carbon::now()->timestamp],
+                ["available_until", '>=', Carbon::now()->timestamp],
             ]
         )->orderBy('views')->get();
 

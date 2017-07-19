@@ -33,15 +33,15 @@
                 </li> --}}
 
                 {{-- Проверяем есть ли активные промо акции\Копании. Сезонные пачковые предложения --}}
-                @if(count(DB::table("promo_companies")->where("is_show", 1)->get()))
+                {{-- @if(count(DB::table("promo_companies")->where("is_show", 1)->get()))
                   @foreach(DB::table("promo_companies")->where("is_show", 1)->get() as $promo)
                     <li>
                       <a href="promo/{{$promo->slug}}">{{$promo->title}}</a>
                     </li>
                   @endforeach
-                @endif
+                @endif --}}
                 {{-- заканчиваем первью промо --}}
-                <li><a href="{{route('faq')}}">Вопрос-ответ</a></li>
+                {{-- <li><a href="{{route('faq')}}">Вопрос-ответ</a></li> --}}
               </ul>
             </nav>
           </div>
@@ -172,7 +172,7 @@
       <h5>Забыли пароль?</h5>
       <form class="dialog-form"><label>почта</label> <input class="span12" type="text" placeholder="почта"> <input class="btn btn-primary" type="submit" value="Восстановить пароль"></form>
     </div>
-    <form class="search-area form-group search-area-white" action="{{route("search")}}">
+    {{-- <form class="search-area form-group search-area-white" action="{{route("search")}}"> --}}
       <div class="container">
         <div class="row">
           <div class="col-md-2 clearfix">
@@ -193,6 +193,6 @@
           <div class="col-md-1"><button class="btn btn-block btn-white search-btn" type="submit">Поиск</button></div>
         </div>
       </div>
-    </form>
+    {{-- </form> --}}
     <div class="gap"></div>
   </div>

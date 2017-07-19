@@ -23,7 +23,7 @@ class CreateCompaniesTable extends Migration
             $table->string('logo');
             $table->string('second_image')->nullable();
             $table->integer('company_type');
-            $table->integer
+            // $table->integer
             $table->timestamps();
         });
     }

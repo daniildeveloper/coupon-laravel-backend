@@ -28,6 +28,7 @@ class CreateCouponsTable extends Migration
             $table->integer('coupon_category');
             $table->integer('min_age')->default(0);
             $table->integer('views');
+            $table->boolean('is_show')->default(0);
             $table->timestamps();
         });
     }
