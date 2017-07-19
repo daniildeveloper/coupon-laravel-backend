@@ -30,8 +30,10 @@
 
     {{-- page footer. creds, app download link --}}
     @include('layouts.footer')
-    
+
     <!-- Scripts -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="/js/app.js"></script>
+    @yield('scripts')
 </body>
 </html>
