@@ -1,7 +1,6 @@
 ## About CouponLand
 
 CouponLand is Laravel based in backend Groupon clone to demonstrate my coding skills in diffirent programming languages and technologies.
-========
 
 ## Features
 
