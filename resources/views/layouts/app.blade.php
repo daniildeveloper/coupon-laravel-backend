@@ -11,6 +11,7 @@
     <title>@yield('title')</title>
 
     <!-- Styles -->
+    
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Scripts -->

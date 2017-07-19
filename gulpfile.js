@@ -14,5 +14,14 @@ require('laravel-elixir-vue-2');
 elixir((mix) => {
     mix.sass('app.scss', 'public/css/app.css');
     mix.webpack('./node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js', './public/js');
-    mix.webpack('./node_modules/jquery/dist/jquery.min.js')
+
+    mix.webpack('./node_modules/jquery/dist/jquery.min.js');
+
+    // bootstrap glyphicons
+    mix.copy('./node_modules/bootstrap-sass/assets/fonts/bootstrap/', './public/fonts');
+
+    // fontawesome
+    mix.copy('./node_modules/font-awesome/fonts','./public/fonts');
+    mix.copy('./node_modules/font-awesome/css/font-awesome.min.css', './public/css');
+
 });
