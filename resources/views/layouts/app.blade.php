@@ -28,6 +28,9 @@
     @yield('content')
     {{-- end content --}}
 
+    {{-- page footer. creds, app download link --}}
+    @include('layouts.footer')
+    
     <!-- Scripts -->
     <script src="/js/app.js"></script>
 </body>
