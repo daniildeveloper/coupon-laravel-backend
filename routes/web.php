@@ -9,13 +9,11 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', 'WelcomeController@index');
 
 Auth::routes();
- 
-Route::get('/home', 'HomeController@index');
 
 Route::group(["prefix" => "shop"], function () {
     Route::get("/", [
@@ -48,3 +46,8 @@ Route::group(["prefix" => "shop"], function () {
         ]);
     });
 });
+
+Route::get('search', 'WelcomeController@search')->name("search");
+Route::get("blog", "WelcomeController@blog")->name('blog');
+Route::get("faq", 'WelcomeController@faq')->name("faq");
+Route::get("newspaper", "WelcomeController@showNewsPaper");

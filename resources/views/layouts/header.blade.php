@@ -3,7 +3,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2">
-            <a class="logo mt5" href="/"><img src="{{asset("img/logo-inline.png")}}" alt="Чики чики" title="Чики чики" style="width: 190px"></a>
+            <a class="logo mt5" href="/"><img src="{{asset("images/logo-inline.png")}}" alt="Чики чики" title="Чики чики" style="width: 190px"></a>
           </div>
           <div class="col-md-6 col-md-offset-4" style="margin-top: 15px">
             <div class="pull-right">
@@ -28,9 +28,9 @@
             <nav>
               <ul class="nav nav-pills flexnav" id="flexnav" data-breakpoint="800">
                 <li class="active"><a href="/">Все купоны</a></li>
-                {{-- <li>
+                <li>
                   <a href="{{url("newspaper")}}">Новости</a>
-                </li> --}}
+                </li>
 
                 {{-- Проверяем есть ли активные промо акции\Копании. Сезонные пачковые предложения --}}
                 {{-- @if(count(DB::table("promo_companies")->where("is_show", 1)->get()))
@@ -41,7 +41,7 @@
                   @endforeach
                 @endif --}}
                 {{-- заканчиваем первью промо --}}
-                {{-- <li><a href="{{route('faq')}}">Вопрос-ответ</a></li> --}}
+                <li><a href="{{route('faq')}}">Вопрос-ответ</a></li>
               </ul>
             </nav>
           </div>
@@ -172,7 +172,7 @@
       <h5>Забыли пароль?</h5>
       <form class="dialog-form"><label>почта</label> <input class="span12" type="text" placeholder="почта"> <input class="btn btn-primary" type="submit" value="Восстановить пароль"></form>
     </div>
-    {{-- <form class="search-area form-group search-area-white" action="{{route("search")}}"> --}}
+    <form class="search-area form-group search-area-white" action="{{route("search") }}">
       <div class="container">
         <div class="row">
           <div class="col-md-2 clearfix">
@@ -193,6 +193,6 @@
           <div class="col-md-1"><button class="btn btn-block btn-white search-btn" type="submit">Поиск</button></div>
         </div>
       </div>
-    {{-- </form> --}}
+    </form>
     <div class="gap"></div>
   </div>
