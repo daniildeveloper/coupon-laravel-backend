@@ -11,8 +11,8 @@
     <title>@yield('title')</title>
 
     <!-- Styles -->
-    
     <link href="/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset("css/font-awesome.min.css")}}">
 
     <!-- Scripts -->
     <script>

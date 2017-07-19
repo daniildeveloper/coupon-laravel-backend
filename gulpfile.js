@@ -22,6 +22,9 @@ elixir((mix) => {
 
     // fontawesome
     mix.copy('./node_modules/font-awesome/fonts','./public/fonts');
-    mix.copy('./node_modules/font-awesome/css/font-awesome.min.css', './public/css');
+
+    mix.styles([
+      './node_modules/font-awesome/css/font-awesome.min.css'
+      ], 'public/css/font-awesome.min.css');
 
 });
