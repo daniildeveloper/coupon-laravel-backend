@@ -12,6 +12,15 @@
  */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('/home', 'WelcomeController@index');
+
+/**
+ * Cabinet for seller and buyer
+ */
+Route::get("/cabinet", "CabinetController@showCabinet")->name("cabinet");
+/**
+ * Cabinet for seller and buyer
+ */
 
 Auth::routes();
 
