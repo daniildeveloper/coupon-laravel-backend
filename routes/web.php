@@ -36,10 +36,10 @@ Route::group(["prefix" => "shop"], function () {
         ]);
         Route::get("/increment/{id}", [
             'uses' => "ShoppingCartController@incrementItemInCart",
-        ]);
+        ])->name('cart.increment');
         Route::get("/decrement/{id}", [
             'uses' => "ShoppingCartController@decrementItemInCart",
-        ]);
+        ])->name('cart.decrement');
         Route::post("/checkout", [
             "uses" => "ShoppingCartController@checkout",
             "as"   => "checkout",
