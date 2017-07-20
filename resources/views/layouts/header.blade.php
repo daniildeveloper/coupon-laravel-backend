@@ -49,6 +49,7 @@
             <ul class="login-register">
               <li>
                 <a href="{{ route('favorites') }}">
+                  <i class="fa fa-heart"></i>
                   Избранное
                 </a>
               </li>

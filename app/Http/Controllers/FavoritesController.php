@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Coupon;
 use App\Model\Favorites;
 use Illuminate\Http\Request;
-use \DB;
-use \Session;
 use \Auth;
+use \Session;
 
 class FavoritesController extends Controller
 {
@@ -18,15 +17,21 @@ class FavoritesController extends Controller
      */
     public function index()
     {
+        $favoritesFromSession = Session::has('favorites') ? Session::get('favorites')->items : array();
+
         $favorites = array();
-        if (Auth::user() === null) {
-            $favorites = Session::has('favorites') ? Session::get('favorites') : array();
-        } else {
-            $oldFavoritesFromDB = DB::table('favorites')->where('user_id', Auth::user()->id)->get();
-            $favorites          = count($oldFavoritesFromDB) > 0 ? $oldFavoritesFromDB[0] : array();
+
+        foreach ($favoritesFromSession as $key) {
+            $favorites[] = $key['item'];
         }
+        // if (Auth::user() === null) {
+        //     $favorites = Session::has('favorites') ? Session::get('favorites')->items : array();
+        // } else {
+        //     $oldFavoritesFromDB = DB::table('favorites')->where('user_id', Auth::user()->id)->get();
+        //     $favorites          = count($oldFavoritesFromDB) > 0 ? $oldFavoritesFromDB[0] : array();
+        // }
         return view('favorites.index', [
-            'favorites' => $favorites,
+            'products' => $favorites,
         ]);
     }
 
