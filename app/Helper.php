@@ -17,11 +17,11 @@ class Helper extends Model
 
         $favorites = Session::get('favorites');
         // if fvorites doesnt exist return false
-        if (count($favorites->items) === 0) {
+        if ($favorites !== null && count($favorites->items) === 0) {
             return false;
         }
 
-        return isset($favorites->items[$id]) ? true : false;
+        return isset($favorites->items[$id]) && $favorites->items[$id]['qty'] > 0 ? true : false;
     }
 
     /**
