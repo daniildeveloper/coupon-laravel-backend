@@ -7,6 +7,7 @@ use App\Model\Favorites;
 use Illuminate\Http\Request;
 use \DB;
 use \Session;
+use \Auth;
 
 class FavoritesController extends Controller
 {

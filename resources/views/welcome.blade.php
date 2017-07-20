@@ -15,7 +15,7 @@ CouponLand
       <div class="gap gap-small"></div>
       <div class="row row-wrap">
         @foreach($products as $product)
-        
+          {{-- {{ dd(Session::get('favorites')) }} --}}
           <div class="col-md-4">
             <div class="product-thumb"  @if ($product->is_border) style="border: 5px solid #FEC52E; @endif ">
                 @if($product->is_hit != 0)
@@ -25,6 +25,11 @@ CouponLand
                     </div>
                   </div>
                 @endif
+                <div class="favorites-link ">
+                  <a href="{{ route(H::favoritesToggle($product->id), ['id' => $product->id]) }}" class="favorites @if(H::checkFavorites($product->id)) active @endif">
+                    <i class="fa fa-heart"></i>
+                  </a>
+                </div>
               <header class="product-header"><img style="height: 260px" src="{{$product->image}}" alt="{{$product->title}}" title="{{$product->title}}">
                 <div class="product-quick-view">
                   <a class="fa fa-eye popup-text" href="#product-quick-view-dialog-{{$product->id}}" data-effect="mfp-move-from-top" data-toggle="tooltip" data-placement="top" title="Посмотреть"></a>

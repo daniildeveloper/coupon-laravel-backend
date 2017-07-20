@@ -47,6 +47,11 @@
           </div>
           <div class="col-md-6">
             <ul class="login-register">
+              <li>
+                <a href="{{ route('favorites') }}">
+                  Избранное
+                </a>
+              </li>
               <li class="shopping-cart"><a href="{{route("shop.cart")}}"><i class="fa fa-shopping-cart"></i>Корзина</a></li>
               @if(Auth::user() === null)
                 <li><a class="popup-text" href="#login-dialog" data-effect="mfp-move-from-top"><i class="fa fa-sign-in"></i>Войти</a></li>

@@ -17,10 +17,11 @@ class Favorites extends Model
      */
     public $items = array();
 
-    public function __construct($old) {
-      if ($old) {
-        $this->items = $old->items;
-      }
+    public function __construct($old)
+    {
+        if ($old) {
+            $this->items = $old->items;
+        }
     }
 
     public function add($item, $id)

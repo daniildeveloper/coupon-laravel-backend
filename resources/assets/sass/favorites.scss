@@ -1,0 +1,26 @@
+
+.favorites {
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-height: 50px;
+  z-index: 999999;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.2);
+  &:hover, &.active {
+    i {
+      color: $red;
+    }
+  }
+  i{
+    color: #fff;
+    opacity: 0.5;
+    font-size: 4rem;
+  }
+}
+.active{
+  i {
+    color: $red;
+  }
+}
+

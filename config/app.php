@@ -228,6 +228,7 @@ return [
 
         // aplictions aliases
         'S'            => App\Model\SystemSetting::class,
+        'H'            => App\Helper::class,
 
     ],
 

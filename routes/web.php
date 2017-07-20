@@ -56,6 +56,22 @@ Route::group(["prefix" => "shop"], function () {
     });
 });
 
+/**
+ * ====================
+ *     FAVORITES
+ * ====================
+ */
+Route::group(['prefix' => 'favorites'], function () {
+    Route::get('/', 'FavoritesController@index')->name('favorites');
+    Route::get('/add/{id}', 'FavoritesController@addToFavorites')->name('favorites.add');
+    Route::get('/remove/{id}', 'FavoritesController@removeFromFavorites')->name('favorites.remove');
+});
+/**
+ * ====================
+ *     END FAVORITES
+ * ====================
+ */
+
 Route::group(['prefix' => 'c'], function () {
     Route::get('/', 'CouponController@showAllCoupons')->name('c-all');
     Route::get('/add', 'CompanyController@showNewCouponForm')->name('c-add');
