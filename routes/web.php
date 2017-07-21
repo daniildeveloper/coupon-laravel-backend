@@ -92,6 +92,20 @@ Route::get("faq", 'WelcomeController@faq')->name("faq");
 Route::get("newspaper", "WelcomeController@showNewsPaper");
 
 /**
+ * ===============================
+ *         HELPERS
+ * ===============================
+ */
+Route::get('/links', function () {
+    return view('links');
+})->name('links');
+/**
+ * ===============================
+ *         END HELPERS
+ * ===============================
+ */
+
+/**
  * ================================
  *         ROUTES FOR SELLER
  * ================================
