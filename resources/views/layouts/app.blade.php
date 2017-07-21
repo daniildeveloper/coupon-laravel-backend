@@ -25,7 +25,9 @@
     @include('layouts.header')
 
     {{-- All content goes here --}}
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
     {{-- end content --}}
 
     {{-- page footer. creds, app download link --}}

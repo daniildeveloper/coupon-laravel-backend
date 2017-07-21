@@ -5,8 +5,7 @@ CouponLand
 @endsection
 
 @section('content')
-<main>
-    <div class="container">
+<div class="container">
   <div class="row">
     <div class="col-md-3">
       @include("layouts.sidebar")
@@ -137,7 +136,7 @@ CouponLand
     </div>
   </div>
 </div>
-</main>
+
 @endsection
 
 @section("scripts")

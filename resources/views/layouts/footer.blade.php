@@ -1,3 +1,4 @@
+<div class="gap gap-small"></div>
 <footer class="main">
     <div class="footer-top-area">
         <div class="container">

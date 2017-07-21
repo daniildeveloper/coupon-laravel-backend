@@ -87,18 +87,23 @@
     <div class="container">
       <h2>Новая компания</h2>
     </div>
+    {{-- new company row --}}
     <div class="row row-wrap">
+
+      {{-- left column --}}
       <div class="col-md-5">
         <div class="container">
           <h3>Название и адрес</h3>
         </div>
         <div class="container">
           <div class="row row-wrap">
+
+            {{-- seller name --}}
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
               <label for="password" class="col-md-12 control-label">Название</label>
 
               <div class="col-md-5">
-                  <input id="seller_name" type="seller_name" class="form-control" name="seller_name" required>
+                  <input id="seller_name" type="text" class="form-control" name="seller_name" required>
 
                   @if ($errors->has('seller_name'))
                       <span class="help-block">
@@ -107,24 +112,64 @@
                   @endif
               </div>
             </div>
-
-            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-              <label for="password" class="col-md-12 control-label">Название</label>
+            {{-- end seller name --}}
+            
+            {{-- seller address --}}
+            <div class="form-group{{ $errors->has('seller_name') ? ' has-error' : '' }}">
+              <label for="seller_name" class="col-md-12 control-label">Адрес</label>
 
               <div class="col-md-5">
-                  <input id="seller_name" type="seller_name" class="form-control" name="seller_name" required>
+                  <input id="seller_name" type="text" class="form-control" name="seller_name" required>
 
                   @if ($errors->has('seller_name'))
                       <span class="help-block">
-                          <strong>{{ $errors->first('seller_name') }}</strong>
+                          <strong>{{ $errors->first('seller_address') }}</strong>
                       </span>
                   @endif
               </div>
             </div>
+            {{-- end seller address --}}
+
+            {{-- seller phone --}}
+            <div class="form-group{{ $errors->has('seller_phone') ? ' has-error' : '' }}">
+              <label for="password" class="col-md-12 control-label">Телефон</label>
+
+              <div class="col-md-5">
+                  <input id="seller_phone" type="text" class="form-control" name="seller_phone" required>
+
+                  @if ($errors->has('seller_phone'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('seller_phone') }}</strong>
+                      </span>
+                  @endif
+              </div>
+            </div>
+            {{-- end seller phone --}}
+
+            {{-- seller second_phone --}}
+            <div class="form-group{{ $errors->has('seller_second_phone') ? ' has-error' : '' }}">
+              <label for="password" class="col-md-12 control-label">Второй телефон</label>
+
+              <div class="col-md-5">
+                  <input id="seller_second_phone" type="text" class="form-control" name="seller_second_phone" required>
+
+                  @if ($errors->has('seller_second_phone'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('seller_second_phone') }}</strong>
+                      </span>
+                  @endif
+              </div>
+            </div>
+            {{-- end seller phone --}}
           </div>
         </div>
-
       </div>
+      {{-- end left column --}}
+
     </div>
+    {{-- end new company row --}}
+    <div class="container"><button class="text-center btn btn-success" type="submit">Зарегистрировать</button></div>
   </form>
+  {{-- end company creation form --}}
+  
 @endsection
