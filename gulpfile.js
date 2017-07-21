@@ -16,6 +16,7 @@ elixir((mix) => {
     mix.webpack('./node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js', './public/js');
 
     mix.webpack('./node_modules/jquery/dist/jquery.min.js');
+    mix.webpack('./node_modules/jquery.countdown/jquery.countdown.js');
 
     // bootstrap glyphicons
     mix.copy('./node_modules/bootstrap-sass/assets/fonts/bootstrap/', './public/fonts');

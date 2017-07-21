@@ -90,3 +90,19 @@ Route::get('search', 'WelcomeController@search')->name("search");
 Route::get("blog", "WelcomeController@blog")->name('blog');
 Route::get("faq", 'WelcomeController@faq')->name("faq");
 Route::get("newspaper", "WelcomeController@showNewsPaper");
+
+/**
+ * ================================
+ *         ROUTES FOR SELLER
+ * ================================
+ */
+// view to register seller
+Route::get('register-seller', 'SellerController@showRegisterView')->name('seller.register.view');
+// register seller
+Route::post('register-seller', 'SellerController@register')->name('seller.register');
+
+/**
+ * ================================
+ *         END ROUTES FOR SELLER
+ * ================================
+ */

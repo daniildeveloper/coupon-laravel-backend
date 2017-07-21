@@ -176,19 +176,18 @@ CouponLand
 <script src="{{asset("js/custom.js")}}">
 </script>
 <script src="{{asset("js/simple.js")}}"></script>
-  <script src="{{asset("vendors/jquery.countdown/dist/jquery.countdown.js")}}">
-    
-  </script>
+<script src="{{asset("js/jquery.countdown.js")}}">
+</script>
 
   
-  <script>
-    window.onload = function() {
+  {{-- <script>
+   window.onload = function() {
       @foreach($products as $product)
         $("#countdown{{$product->id}}").countdown("{{\Carbon\Carbon::parse($product->available_until)->format("Y/m/d")}}", function(event) {
             $(this).text(event.strftime("%D дней %H:%M:%S"));
         })
       @endforeach
     }
-  </script>
+  </script> --}}
 
 @endsection 
