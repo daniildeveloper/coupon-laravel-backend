@@ -9,7 +9,7 @@
     <div class="col-md-3">
       <h3>Компания</h3>
       <ul>
-        <li><a href="{{ route('seller.register.view') }}"></a></li>
+        <li><a href="{{ route('seller.register.view') }}">Регистрация компании</a></li>
         <li><a href=""></a></li>
         <li><a href=""></a></li>
         <li><a href=""></a></li>

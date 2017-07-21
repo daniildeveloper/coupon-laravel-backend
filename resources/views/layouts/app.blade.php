@@ -32,8 +32,41 @@
     @include('layouts.footer')
 
     <!-- Scripts -->
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="/js/app.js"></script>
+    <script src="{{asset("js/jquery.js")}}">
+    </script>
+    <script src="{{asset("js/boostrap.min.js")}}">
+    </script>
+    <script src="{{asset("js/countdown.min.js")}}">
+    </script>
+    <script src="{{asset("js/flexnav.min.js")}}">
+    </script>
+    <script src="{{asset("js/magnific.js")}}">
+    </script>
+    <script src="{{asset("js/tweet.min.js")}}">
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false">
+    </script>
+    <script src="{{asset("js/fitvids.min.js")}}">
+    </script>
+    <script src="{{asset("js/mail.min.js")}}">
+    </script>
+    <script src="{{asset("js/ionrangeslider.js")}}">
+    </script>
+    <script src="{{asset("js/icheck.js")}}">
+    </script>
+    <script src="{{asset("js/fotorama.js")}}">
+    </script>
+    <script src="{{asset("js/card-payment.js")}}">
+    </script>
+    <script src="{{asset("js/owl-carousel.js")}}">
+    </script>
+    <script src="{{asset("js/masonry.js")}}">
+    </script>
+    <script src="{{asset("js/nicescroll.js")}}">
+    </script>
+    <script src="{{asset("js/custom.js")}}">
+    </script>
+    <script src="{{asset("js/simple.js")}}"></script>
     @yield('scripts')
 </body>
 </html>
