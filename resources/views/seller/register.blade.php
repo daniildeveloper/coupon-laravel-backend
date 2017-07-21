@@ -99,8 +99,8 @@
           <div class="row row-wrap">
 
             {{-- seller name --}}
-            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-              <label for="password" class="col-md-12 control-label">Название</label>
+            <div class="form-group{{ $errors->has('seller_name') ? ' has-error' : '' }}">
+              <label for="seller_name" class="col-md-12 control-label">Название</label>
 
               <div class="col-md-5">
                   <input id="seller_name" type="text" class="form-control" name="seller_name" required>
@@ -131,15 +131,15 @@
             {{-- end seller address --}}
 
             {{-- seller phone --}}
-            <div class="form-group{{ $errors->has('seller_phone') ? ' has-error' : '' }}">
-              <label for="password" class="col-md-12 control-label">Телефон</label>
+            <div class="form-group{{ $errors->has('seller_primary_phone') ? ' has-error' : '' }}">
+              <label for="seller_primary_phone" class="col-md-12 control-label">Телефон</label>
 
               <div class="col-md-5">
-                  <input id="seller_phone" type="text" class="form-control" name="seller_phone" required>
+                  <input id="seller_primary_phone" type="text" class="form-control" name="seller_primary_phone" required>
 
-                  @if ($errors->has('seller_phone'))
+                  @if ($errors->has('seller_primary_phone'))
                       <span class="help-block">
-                          <strong>{{ $errors->first('seller_phone') }}</strong>
+                          <strong>{{ $errors->first('seller_primary_phone') }}</strong>
                       </span>
                   @endif
               </div>

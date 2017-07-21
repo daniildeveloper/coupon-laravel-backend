@@ -16,10 +16,10 @@ class CompaniesTableSeeder extends Seeder
         // first demo company
         $water = new Company();
         $water->user_id = 3;
-        $water->name = "Вода";
-        $water->address = 'Some address';
-        $water->primary_phone = '+7800000000';
-        $water->company_type = 1;
+        $water->seller_name = "Вода";
+        $water->seller_address = 'Some address';
+        $water->seller_primary_phone = '+7800000000';
+        $water->seller_company_type = 1;
         $water->save();
     }
 }

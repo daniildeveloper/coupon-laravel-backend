@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\User;
-use \Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use \Auth;
 
 class SellerController extends Controller
-{   
+{
     /**
      * show view with company register
      * @return view
@@ -20,34 +20,34 @@ class SellerController extends Controller
     }
 
     public function register(Request $request)
-    { 
-      $userId = 0;
+    {
+        $userId = 0;
 
-      // register user if isnt logged in. Set user id if is logged in.
-      if(!Auth::user()) {
-        $this->validatorRegister($request->all())->validate();
-        $user = new User();
-        $user->name = $request['name'];
-        $user->password = bcrypt($request['password']);
-        $user->email = $request['email'];
-        $user->save();
-        $userId = $user->id;
-      } else {
-        $userId = Auth::user()->id;
-      }
+        // register user if isnt logged in. Set user id if is logged in.
+        if (!Auth::user()) {
+            $this->validatorRegister($request->all())->validate();
+            $user           = new User();
+            $user->name     = $request['name'];
+            $user->password = bcrypt($request['password']);
+            $user->email    = $request['email'];
+            $user->save();
+            $userId = $user->id;
+        } else {
+            $userId = Auth::user()->id;
+        }
 
-      $seller = new Company();
-      $seller->user_id = $userId;
-      $seller->name = $request['seller_name'];
-      $seller->address = $request['seller_address'];
-      $seller->primary_phone = $request['seller_phone'];
-      $seller->second_phone = $request['seller_second_phone'];
-      $seller->company_type = 1; //TODO: company type select(after admin creation)
-      $seller->save();
+        $seller                = new Company();
+        $seller->user_id       = $userId;
+        $seller->seller_name          = $request['seller_name'];
+        $seller->seller_address       = $request['seller_address'];
+        $seller->seller_primary_phone = $request['seller_primary_phone'];
+        $seller->seller_second_phone  = $request['seller_second_phone'];
+        $seller->seller_company_type  = 1; //TODO: company type select(after admin creation)
+        $seller->save();
 
-      // TODO: email verfication
+        // TODO: email verfication
 
-      return redirect('/');
+        return redirect('/');
     }
 
     public function showSellerDashboard()
@@ -77,9 +77,10 @@ class SellerController extends Controller
     protected function validatorRegister(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name'     => 'required|max:255',
+            'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'seller_name' => 'required|max:255|unique:companies',
         ]);
     }
 }
