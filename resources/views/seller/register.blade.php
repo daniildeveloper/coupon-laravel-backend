@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-  <form role="form" method="POST" class="container">
+  <form role="form" method="POST" class="container" action="{{ route('seller.register') }}">
     {{ csrf_field() }}
     <div class="container">
       <h1>Регистрация новой компании</h1>
@@ -115,13 +115,13 @@
             {{-- end seller name --}}
             
             {{-- seller address --}}
-            <div class="form-group{{ $errors->has('seller_name') ? ' has-error' : '' }}">
-              <label for="seller_name" class="col-md-12 control-label">Адрес</label>
+            <div class="form-group{{ $errors->has('seller_address') ? ' has-error' : '' }}">
+              <label for="seller_address" class="col-md-12 control-label">Адрес</label>
 
               <div class="col-md-5">
-                  <input id="seller_name" type="text" class="form-control" name="seller_name" required>
+                  <input id="seller_address" type="text" class="form-control" name="seller_address" required>
 
-                  @if ($errors->has('seller_name'))
+                  @if ($errors->has('seller_address'))
                       <span class="help-block">
                           <strong>{{ $errors->first('seller_address') }}</strong>
                       </span>
@@ -171,5 +171,5 @@
     <div class="container"><button class="text-center btn btn-success" type="submit">Зарегистрировать</button></div>
   </form>
   {{-- end company creation form --}}
-  
+
 @endsection
