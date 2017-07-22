@@ -117,6 +117,70 @@ Route::get('register-seller', 'SellerController@showRegisterView')->name('seller
 // register seller
 Route::post('register-seller', 'SellerController@register')->name('seller.register');
 
+// Routes group
+Route::group(['prefix' => 'seller', 'middleware' => 'auth'], function () {
+    // seller dashoard. Here is to view all data quickly.
+    Route::get('dashboard', 'SellerController@showSellerDashboard')->name('seller.dashboard');
+
+    // seller coupons
+    Route::group(['prefix' => 'coupon'], function () {
+        //  show seller coupons
+        Route::get('/', 'SellerController@showSellerCoupons')->name('seller.coupons');
+
+        // confirm coupon
+        Route::get('confirm', 'SellerController@confirmCoupon')->name('seller.coupons.confirm');
+    });
+
+    // seller managers
+    Route::group(['prefix' => 'managers'], function () {
+        // show all managers
+        Route::get('/', 'SellerController@showManagers')->name('seller.managers');
+        // TODO: invite manager per email
+        // TODO: manager single cabinet with photo upload, contacts, and chat link
+        // TODO: managers stats
+    });
+    // end seller managers
+
+    // sellers coupon orders
+    // here are coupons orders history. To plan how many comes from CouponLand
+    Route::get('orders', 'SellerController@showOrders')->name('seller.orders');
+
+    // clients
+    Route::group(['prefix' => 'clients'], function () {
+        // clients list
+        Route::get('/', 'SellerController@showClients')->name('seller.clients.top20');
+        // TODO: make coupon with additional sale/special price
+        // TODO: invite to event
+        // TODO: send gift(gift-code, special offer, gift-ware)
+    });
+    // End clients
+
+    // payments
+    Route::group(['prefix' => 'payments'], function () {
+        // show all payments
+        Route::get('/', 'SellerController@showPayments')->name('seller.payments');
+        // take money to cart
+        Route::get('/out', 'SellerController@out')->name('seller.payments.out');;
+        // TODO: make payment
+        // TODO: my money
+    });
+    // end payments
+    
+    // accounting
+    Route::group(['prefix' => 'accounting'], function() {
+        //list with possible exels
+        Route::get('/', 'SellerController@showAccountingDataList')->name('accounting');
+        // TODO: generate exel with views and buys
+        // TODO: generate exels with manager statistics
+        // TODO: generate exel with payments history
+        // TODO: generate exel with all time or selected time views, buys, and sells statistics
+    });
+    // end accounting
+    
+    // TODO: messenger
+
+});
+
 /**
  * ================================
  *         END ROUTES FOR SELLER
