@@ -19,6 +19,11 @@ class SellerController extends Controller
         return view('seller.register');
     }
 
+    /**
+     * register company
+     * @param  Request $request data from form
+     * @return redirect           redirect to main page
+     */
     public function register(Request $request)
     {
         $userId = 0;
@@ -48,8 +53,10 @@ class SellerController extends Controller
 
         // TODO: email verfication
 
-        // TODO: redirect to main page with alert
-        return redirect('/');
+        return redirect('/', [
+            'alert'        => 'Спасибо за регистрацию. Проверьте вашу почту, туда пришло письмо с подтверждением. В ближайшее время Ваш персональный консультант свяжется с вами по указанным телефонам и ответит на все возникшие вопросы.',
+            'alertContext' => 'success',
+        ]);
     }
 
     public function showSellerDashboard()
