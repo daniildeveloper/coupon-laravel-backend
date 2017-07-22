@@ -60,7 +60,10 @@ class SellerController extends Controller
     }
 
     public function showSellerDashboard()
-    {}
+    {
+      
+      return view('seller.dashoard');
+    }
 
     public function showSellerCoupons()
     {}
