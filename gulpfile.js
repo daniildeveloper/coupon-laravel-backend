@@ -28,4 +28,5 @@ elixir((mix) => {
       './node_modules/font-awesome/css/font-awesome.min.css'
       ], 'public/css/font-awesome.min.css');
 
+    mix.webpack('./node_modules/chart.js/dist/Chart.bundle.min.js');
 });

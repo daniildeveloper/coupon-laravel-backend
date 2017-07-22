@@ -19,6 +19,7 @@
     "bootstrap-fileinput": "^4.4.2",
     "bootstrap-material-datetimepicker": "^2.7.3",
     "bootstrap-material-design": "^0.5.10",
+    "chart.js": "^2.6.0",
     "dropzone": "^5.1.1",
     "font-awesome": "^4.7.0",
     "fontawesome": "^4.7.2",
