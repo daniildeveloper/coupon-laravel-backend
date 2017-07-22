@@ -36,6 +36,7 @@ class SellerController extends Controller
             $userId = Auth::user()->id;
         }
 
+        // register seller
         $seller                       = new Company();
         $seller->user_id              = $userId;
         $seller->seller_name          = $request['seller_name'];

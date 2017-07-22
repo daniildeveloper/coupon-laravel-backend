@@ -236,4 +236,12 @@ class WelcomeController extends Controller
             "news" => DB::table("news")->get(),
         ]);
     }
+
+    public function thanks()
+    {
+        return view('thanks', [
+            'title' => 'Спасибо',
+            'message' => 'Спасибо'
+        ]);
+    }
 }

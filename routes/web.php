@@ -99,6 +99,8 @@ Route::get("newspaper", "WelcomeController@showNewsPaper");
 Route::get('/links', function () {
     return view('links');
 })->name('links');
+
+Route::get('thanks', 'WelcomeController@thanks')->name('thanks');
 /**
  * ===============================
  *         END HELPERS

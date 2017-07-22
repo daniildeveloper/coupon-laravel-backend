@@ -16,6 +16,15 @@
         <li><a href=""></a></li>
       </ul>
     </div>
-    <div class="col-md-6"></div>
+    <div class="col-md-3">
+      <h3>Helpers</h3>
+      <ul>
+        <li><a href="{{ route('thanks') }}">Спасибо</a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+      </ul>
+    </div>
   </div>
 @endsection
