@@ -36,17 +36,18 @@ class SellerController extends Controller
             $userId = Auth::user()->id;
         }
 
-        $seller                = new Company();
-        $seller->user_id       = $userId;
+        $seller                       = new Company();
+        $seller->user_id              = $userId;
         $seller->seller_name          = $request['seller_name'];
         $seller->seller_address       = $request['seller_address'];
         $seller->seller_primary_phone = $request['seller_primary_phone'];
         $seller->seller_second_phone  = $request['seller_second_phone'];
-        $seller->seller_company_type  = 1; //TODO: company type select(after admin creation)
+        $seller->seller_company_type  = $request['company_type'];
         $seller->save();
 
         // TODO: email verfication
 
+        // TODO: redirect to thank you page
         return redirect('/');
     }
 
@@ -77,9 +78,9 @@ class SellerController extends Controller
     protected function validatorRegister(array $data)
     {
         return Validator::make($data, [
-            'name'     => 'required|max:255',
-            'email'    => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'name'        => 'required|max:255',
+            'email'       => 'required|email|max:255|unique:users',
+            'password'    => 'required|min:6|confirmed',
             'seller_name' => 'required|max:255|unique:companies',
         ]);
     }

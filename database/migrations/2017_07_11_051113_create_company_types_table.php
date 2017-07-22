@@ -17,7 +17,7 @@ class CreateCompanyTypesTable extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

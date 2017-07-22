@@ -71,7 +71,7 @@
           
           {{-- password confirm --}}
           <div class="form-group">
-              <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+              <label for="password-confirm" class="col-md-4 control-label">Подтверждение пароля</label>
 
               <div class="col-md-6">
                   <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
@@ -161,6 +161,19 @@
               </div>
             </div>
             {{-- end seller phone --}}
+
+            {{-- select with company types --}}
+            <div class="form-group">
+              <label for="company_type" class="col-md-12 control-label">Тип компании:</label>
+              <div class="col-md-5">
+                <select name="company_type" id="company_type" class="form-control">
+                  @foreach(\App\Model\CompanyType::all() as $companyType)
+                    <option value="{{ $companyType->id }}">{{ $companyType->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            {{-- end select with company types --}}
           </div>
         </div>
       </div>
