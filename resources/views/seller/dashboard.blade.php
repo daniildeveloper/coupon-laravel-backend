@@ -1,20 +1,34 @@
 @extends('seller.layout')
 
 @section('seller_content')
-  <h1 class="text-center">
-      Seller dashboard
-  </h1>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="pull-left"><i class="fa fa-money fa-2x"></i></div>
+      {{-- TODO: payements --}}
+      <div class="pull-right">2000тг на счету</div>
+    </div>
+    <div class="col-sm-3">
+      <div class="pull-left"><i class="fa fa-tags fa-2x"></i></div>
+      {{-- TODO: active coupons --}}
+      <div class="pull-right">0 активных купонов</div>
+    </div>
+    <div class="col-sm-3">
+      <div class="pull-left"><i class="fa fa-envelope-o"></i></div>
+      {{-- TODO: after messanger creation fill it --}}
+      <div class="pull-right">0 непрочитаных</div>
+    </div>
+    <div class="col-sm-3">
+      <div class="pull-left"><i class="fa fa-address-book-o"></i></div>
+      {{-- TODO: logic returned clients --}}
+      <div class="pull-right">0 лояльных клиентов</div>
+    </div>
+  </div>
   
   {{-- TODO: отчеты за день\месяц\год с возможностью выбора --}}
   {{-- TODO: возмоность просматривать простые добавления в корзину и в избранное--}}
   {{-- coupons: views and byus summary --}}
   <canvas id="couponsChart" width="400" height="200"> </canvas>
   {{-- end coupons views and buys --}}
-
-  {{-- TODO: денег на счету --}}
-  {{-- TODO: непрочитаные сообщения --}}
-  {{-- TODO: новые отзывы о купонах--}}
-  {{-- TODO: жалобы и претензии --}}
 @endsection
 
 @section('scripts')
@@ -25,6 +39,7 @@
       red: '#FF6384',
       blue: '#9AD0F4'
     }
+    //TODO: real data for graphics
     function createConfig(gridlines, title) {
             return {
                 type: 'line',
