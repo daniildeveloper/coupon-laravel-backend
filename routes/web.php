@@ -118,7 +118,7 @@ Route::get('register-seller', 'SellerController@showRegisterView')->name('seller
 Route::post('register-seller', 'SellerController@register')->name('seller.register');
 
 // Routes group
-Route::group(['prefix' => 'seller', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
     // seller dashoard. Here is to view all data quickly.
     Route::get('dashboard', 'SellerController@showSellerDashboard')->name('seller.dashboard');
 

@@ -1,48 +1,47 @@
 @extends('seller.layout')
 
 @section('seller_content')
-<div class="container">
-    <div class="row row-wrap">
-        <h1 class="text-center">
-            Seller dashboard
-        </h1>
-        {{-- TODO: отчет по просмотрам купонов и покупкам. --}}
+  <h1 class="text-center">
+      Seller dashboard
+  </h1>
+  
+  {{-- TODO: отчеты за день\месяц\год с возможностью выбора --}}
+  {{-- TODO: возмоность просматривать простые добавления в корзину и в избранное--}}
+  {{-- coupons: views and byus summary --}}
+  <canvas id="couponsChart" width="400" height="200"> </canvas>
+  {{-- end coupons views and buys --}}
 
-      {{-- coupons: views and byus summary --}}
-        <div class="container">
-          <canvas id="couponsChart" width="400" height="400"> </canvas>
-        </div>
-        {{-- end coupons views and buys --}}
-
-      {{-- TODO: денег на счету --}}
-      {{-- TODO: непрочитаные сообщения --}}
-      {{-- TODO: новые отзывы о купонах--}}
-      {{-- TODO: жалобы и претензии --}}
-    </div>
-</div>
+  {{-- TODO: денег на счету --}}
+  {{-- TODO: непрочитаные сообщения --}}
+  {{-- TODO: новые отзывы о купонах--}}
+  {{-- TODO: жалобы и претензии --}}
 @endsection
 
 @section('scripts')
 <script src="{{ asset('js/Chart.bundle.min.js') }}">
 </script>
 <script>
+    var chartColors = {
+      red: '#FF6384',
+      blue: '#9AD0F4'
+    }
     function createConfig(gridlines, title) {
             return {
                 type: 'line',
                 data: {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                    labels: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],
                     datasets: [{
-                        label: "My First dataset",
+                        label: "Просмотры",
                         backgroundColor: window.chartColors.red,
                         borderColor: window.chartColors.red,
-                        data: [10, 30, 39, 20, 25, 34, 0],
+                        data: [20, 30, 39, 20, 25, 34, 20],
                         fill: false,
                     }, {
-                        label: "My Second dataset",
+                        label: "Покупки",
                         fill: false,
                         backgroundColor: window.chartColors.blue,
                         borderColor: window.chartColors.blue,
-                        data: [18, 33, 22, 19, 11, 39, 30],
+                        data: [18/2, 33/2, 22/2, 19/2, 11/2, 39/2, 30/2],
                     }]
                 },
                 options: {
@@ -59,7 +58,7 @@
                             gridLines: gridlines,
                             ticks: {
                                 min: 0,
-                                max: 100,
+                                max: 50,
                                 stepSize: 10
                             }
                         }]
@@ -76,7 +75,7 @@
         display: true
       };
 
-      var config = createConfig(gridlines, "Все купоны");
+      var config = createConfig(gridLines, "Все купоны");
       new Chart(ctx, config);
     }
 </script>

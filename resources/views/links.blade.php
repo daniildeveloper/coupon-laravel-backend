@@ -10,7 +10,7 @@
       <h3>Компания</h3>
       <ul>
         <li><a href="{{ route('seller.register.view') }}">Регистрация компании</a></li>
-        <li><a href=""></a></li>
+        <li><a href="{{ route('seller.dashboard') }}">Dashboard</a></li>
         <li><a href=""></a></li>
         <li><a href=""></a></li>
         <li><a href=""></a></li>
@@ -20,7 +20,7 @@
       <h3>Helpers</h3>
       <ul>
         <li><a href="{{ route('thanks') }}">Спасибо</a></li>
-        <li><a href="#"></a></li>
+        <li><a href=""></a></li>
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>

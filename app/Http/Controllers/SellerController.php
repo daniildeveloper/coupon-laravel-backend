@@ -61,8 +61,8 @@ class SellerController extends Controller
 
     public function showSellerDashboard()
     {
-      
-      return view('seller.dashoard');
+
+      return view('seller.dashboard');
     }
 
     public function showSellerCoupons()

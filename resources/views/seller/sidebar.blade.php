@@ -1,7 +1,7 @@
 <aside class="sidebar-left">
     <ul class="nav nav-tabs nav-stacked nav-coupon-category nav-coupon-category-left">
         <li>
-            <a href="{{ rote('seller.dashboard') }}">
+            <a href="{{ route('seller.dashboard') }}">
                 <i class="fa fa-dashboard">
                 </i>
                 Панель управления
