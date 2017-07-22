@@ -17,9 +17,9 @@ class SellerMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() === null) {
-            return redirect("/login");
-        } elseif (Auth::user() != null && count(DB::table('companies')->where('user_id', Auth::user()->id)->get()) === 0) {
+        if (Auth::user() === null || Auth::user() != null && count(DB::table('companies')->where('user_id', Auth::user()->id)->get()) === 0) {
+
+            // TODO: alert message
             return redirect()->route('seller.register');
         }
     }
