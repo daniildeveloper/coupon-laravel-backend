@@ -20,7 +20,10 @@ class SellerMiddleware
         if (Auth::user() === null || Auth::user() != null && count(DB::table('companies')->where('user_id', Auth::user()->id)->get()) === 0) {
 
             // TODO: alert message
-            return redirect()->route('seller.register');
+            return redirect()->route('seller.register', [
+                'alert'        => 'Заполните анкету продавца. И начинайте рекламировать свои товары и услуги',
+                'alertContext' => 'success',
+            ]);
         }
     }
 }

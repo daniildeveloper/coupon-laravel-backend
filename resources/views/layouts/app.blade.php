@@ -24,6 +24,17 @@
 <body>
     @include('layouts.header')
 
+    {{-- alert --}}
+    @if(isset($alert))
+        <div class="container">
+            <div class="alert alert-{{ isset($alertContext) ? $alertContext : 'warning' }} alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+              <strong>{{ isset($alertStrong) ? $alertStrong : '' }}</strong> {!! $alert !!}
+            </div>
+        </div>
+    @endif
+    {{-- end alert --}}
+
     {{-- All content goes here --}}
     <main>
         @yield('content')

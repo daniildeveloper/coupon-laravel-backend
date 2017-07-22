@@ -48,7 +48,7 @@ class SellerController extends Controller
 
         // TODO: email verfication
 
-        // TODO: redirect to thank you page
+        // TODO: redirect to main page with alert
         return redirect('/');
     }
 
