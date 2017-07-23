@@ -165,7 +165,6 @@ return [
 
         /*
          * Package Service Providers...
-         */
 
         //
 
@@ -227,8 +226,10 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
 
         // aplictions aliases
-        'S'            => App\Model\SystemSetting::class,
+        // helper class
         'H'            => App\Helper::class,
+        // system settings. phones, datas
+        'S'            => App\Model\SystemSetting::class,
 
     ],
 

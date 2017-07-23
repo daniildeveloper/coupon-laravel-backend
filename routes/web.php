@@ -186,3 +186,25 @@ Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
  *         END ROUTES FOR SELLER
  * ================================
  */
+
+
+ /* ================================
+ *     PAYMENTS
+ * ================================
+ */
+Route::group(['prefix' => 'pay', 'namespace' => 'Payments'], function () {
+    Route::get('/', function () {
+        return view('auth.login');
+    });
+
+    // qiwi payments
+    Route::group(['prefix' => 'qiwi'], function () {
+        Route::get('gate', 'QiwiController@checkOrder')->name('pay.qiwi.gateurl');
+    });
+    // end qiwi payments
+});
+/**
+ * ================================
+ *     END PAYMENTS
+ * ================================
+ */

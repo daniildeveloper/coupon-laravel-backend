@@ -59,7 +59,6 @@ CouponLand
               </div>
             </div>
           </div>
-
           {{-- quick view dialog --}}
         <div class="mfp-with-anim mfp-hide mfp-dialog mfp-dialog-big clearfix" id="product-quick-view-dialog-{{$product->id}}">
           <div class="row">
