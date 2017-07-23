@@ -7,9 +7,18 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use \Auth;
+use \DB;
 
 class SellerController extends Controller
 {
+    private $sellerId = 1;
+
+    public function __construct()
+    {
+        if (Auth::user() !== null) {
+            $this->sellerId = DB::table('companies')->where('user_id', Auth::user()->id)->get()[0]->id;
+        }
+    }
     /**
      * show view with company register
      * @return view
@@ -59,14 +68,23 @@ class SellerController extends Controller
         ]);
     }
 
+    /**
+     * show seller dashboard with main statistics
+     * @return view
+     */
     public function showSellerDashboard()
     {
 
-      return view('seller.dashboard');
+        return view('seller.dashboard');
     }
 
     public function showSellerCoupons()
-    {}
+    {   
+        $products = DB::table('coupons')->where('company_id', $this->seller_id)->get();
+        return view('seller.coupons', [
+            'products' => $products,
+        ]);
+    }
 
     public function showSellerHistory()
     {}
