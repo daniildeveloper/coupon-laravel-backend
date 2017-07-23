@@ -18,7 +18,7 @@ class CreateUserOrdersTable extends Migration
             $table->integer('user_id');
             $table->integer('company_id');
             $table->text('cart');
-            $table->intege('status_id')->default(0);
+            $table->integer('status_id')->default(0);
             $table->timestamps();
         });
     }
