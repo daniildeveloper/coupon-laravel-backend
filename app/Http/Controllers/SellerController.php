@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use \Auth;
 use \DB;
+use App\Manager;
 
 class SellerController extends Controller
 {
@@ -118,5 +119,15 @@ class SellerController extends Controller
       // todo: send email invation to manager via email
       // if managers email is in system, we have it as manager and give him ops to conversation and coupons CRUD
       // register unknown users
+    }
+
+    /**
+     * show managers list
+     * @return [type] [description]
+     */
+    public function showManagers(){
+      return view('seller.managers', [
+          'managers' => Manager::getCompanieManagers($this->sellerId)
+        ]);
     }
 }
