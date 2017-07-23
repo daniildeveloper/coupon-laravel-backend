@@ -113,4 +113,10 @@ class SellerController extends Controller
             'seller_name' => 'required|max:255|unique:companies',
         ]);
     }
+
+    public function inviteManagers(){
+      // todo: send email invation to manager via email
+      // if managers email is in system, we have it as manager and give him ops to conversation and coupons CRUD
+      // register unknown users
+    }
 }
