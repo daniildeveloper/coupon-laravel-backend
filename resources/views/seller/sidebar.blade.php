@@ -36,7 +36,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('seller.clients.top20') }}">
+            <a href="{{ route('seller.clients') }}">
                 <i class="fa fa-address-book-o">
                 </i>
                 Лояльные клиенты

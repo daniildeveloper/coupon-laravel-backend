@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Manager;
 use App\User;
+use App\Model\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use \Auth;
 use \DB;
-use App\Manager;
 
 class SellerController extends Controller
 {
@@ -80,7 +81,7 @@ class SellerController extends Controller
     }
 
     public function showSellerCoupons()
-    {   
+    {
         $products = DB::table('coupons')->where('company_id', $this->seller_id)->get();
         return view('seller.coupons', [
             'products' => $products,
@@ -96,8 +97,19 @@ class SellerController extends Controller
     public function createCoupon(Request $request)
     {}
 
+    /**
+     * show list of all orders
+     * @return [type] [description]
+     */
     public function showOrders()
-    {}
+    {
+        $orders = DB::table('orders')->where('company_id', $this->sellerId)->get();
+
+        // TODO: paginate
+        return view('seller.orders', [
+            'orders' => $orders,
+        ]);
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -115,19 +127,32 @@ class SellerController extends Controller
         ]);
     }
 
-    public function inviteManagers(){
-      // todo: send email invation to manager via email
-      // if managers email is in system, we have it as manager and give him ops to conversation and coupons CRUD
-      // register unknown users
+    public function inviteManagers()
+    {
+        // todo: send email invation to manager via email
+        // if managers email is in system, we have it as manager and give him ops to conversation and coupons CRUD
+        // register unknown users
     }
 
     /**
      * show managers list
      * @return [type] [description]
      */
-    public function showManagers(){
-      return view('seller.managers', [
-          'managers' => Manager::getCompanieManagers($this->sellerId)
+    public function showManagers()
+    {
+        return view('seller.managers', [
+            'managers' => Manager::getCompanieManagers($this->sellerId),
         ]);
     }
-}
+
+    public function showClientsList(){
+      // get clients from database
+      $clientsList = Client::getSellersClients($this->sellerId);
+
+      return view('seller.clients', [
+          'clients' => $clientsList
+        ]);
+
+    }
+
+  }

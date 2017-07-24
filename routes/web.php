@@ -177,6 +177,11 @@ Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
     });
     // end accounting
     
+    // SELLER CLIENTS
+    Route::group(['prefix' => 'clients'], function () {
+        Route::get('/', 'SellerController@showClientsList')->name('seller.clients');
+    });
+    
     // TODO: messenger
 
 });

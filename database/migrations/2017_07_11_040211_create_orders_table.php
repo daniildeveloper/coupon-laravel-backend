@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id')->nullable();
+            $table->integer('company_id')->nullable();
             $table->string('user_email');
             $table->text("cart"); //to string serialized cart
             $table->text("address");
