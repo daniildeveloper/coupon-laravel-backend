@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Manager;
-use App\User;
 use App\Model\Client;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use \Auth;
@@ -145,14 +145,33 @@ class SellerController extends Controller
         ]);
     }
 
-    public function showClientsList(){
-      // get clients from database
-      $clientsList = Client::getSellersClients($this->sellerId);
+    public function showClientsList()
+    {
+        // get clients from database
+        $clientsList = Client::getSellersClients($this->sellerId);
 
-      return view('seller.clients', [
-          'clients' => $clientsList
+        return view('seller.clients', [
+            'clients' => $clientsList,
         ]);
 
     }
 
-  }
+    /**
+     * check coupons view
+     * @return view
+     */
+    public function confirmCoupon()
+    {
+        $coupons = DB::table('coupons')->where('company_id', $this->sellerId)->get();
+        return view('seller.dealcheck', [
+            'coupons' => $coupons,
+        ]);
+    }
+
+
+    public function checkCoupon(Request $request)
+    {
+      // here goes coupons check logic
+    }
+
+}

@@ -23,7 +23,7 @@
         </li>
         <li>
             <a href="{{ route('seller.orders') }}">
-                <i class="fa fa-order">
+                <i class="fa fa-list-ol">
                 </i>
                 Заказы
             </a>
@@ -66,7 +66,7 @@
         </li> --}}
         <li>
             <a href="{{ route('accounting') }}">
-                <i class="fa fa-file-exel-o">
+                <i class="fa fa-file-excel-o">
                 </i>
                 Отчетность
             </a>
