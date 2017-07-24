@@ -32,6 +32,7 @@ class CreateCouponsTable extends Migration
             $table->boolean('is_hit')->default(0);
             $table->boolean('is_border')->default(0);
             $table->string('image');
+            $table->integer('company_id')->default(1);
             $table->timestamps();
         });
     }

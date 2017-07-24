@@ -82,7 +82,7 @@ class SellerController extends Controller
 
     public function showSellerCoupons()
     {
-        $products = DB::table('coupons')->where('company_id', $this->seller_id)->get();
+        $products = DB::table('coupons')->where('company_id', $this->sellerId)->get();
         return view('seller.coupons', [
             'products' => $products,
         ]);

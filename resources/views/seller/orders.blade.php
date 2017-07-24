@@ -1,3 +1,5 @@
+@extends('seller.layout')
+
 @section('seller_title')
   Мои счета
 @endsection
