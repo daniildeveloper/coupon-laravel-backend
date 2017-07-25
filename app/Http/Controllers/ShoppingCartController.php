@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Company;
 use App\Coupon as Product;
-use App\CouponCode;
+use App\CouponCode; 
 use App\Order;
 use App\OrderProduct;
 use Epay\Client as KazkomPay;

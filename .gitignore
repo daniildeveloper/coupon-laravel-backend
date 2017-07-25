@@ -6,3 +6,8 @@
 Homestead.json
 Homestead.yaml
 .env
+
+# elixir copy packages(?bug)
+langs
+tinymce
+public/bootstrap-material-date-timepicker

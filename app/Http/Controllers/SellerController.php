@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use \Auth;
 use \DB;
+use App\Model\CouponsCategory;
 
 class SellerController extends Controller
 {
@@ -92,7 +93,12 @@ class SellerController extends Controller
     {}
 
     public function showSellerCouponCreationView()
-    {}
+    {
+      $couponCategories = CouponsCategory::all();
+      return view('seller.coupon.new', [
+          'couponCategories' => $couponCategories
+        ]);
+    }
 
     public function createCoupon(Request $request)
     {}

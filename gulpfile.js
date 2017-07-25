@@ -29,4 +29,18 @@ elixir((mix) => {
       ], 'public/css/font-awesome.min.css');
 
     mix.webpack('./node_modules/chart.js/dist/Chart.bundle.min.js');
+
+    /**
+     * tinymce
+     */
+    mix.copy('./node_modules/tinymce/', './public/tinymce');
+    mix.copy('./node_modules/tinymce-i18n/langs', './public/langs');
+
+    /**
+     * Material date time picker
+     */
+    mix.copy('./node_modules/bootstrap-material-datetimepicker', './public/bootstrap-material-date-timepicker');
+    // moment
+    mix.copy('./node_modules/moment/min/moment-with-locales.min.js', './public/js');
+    mix.copy('./node_modules/moment/locale/', './public/locale');
 });

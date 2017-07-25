@@ -11,7 +11,7 @@
       <ul>
         <li><a href="{{ route('seller.register.view') }}">Регистрация компании</a></li>
         <li><a href="{{ route('seller.dashboard') }}">Dashboard</a></li>
-        <li><a href=""></a></li>
+        <li><a href="{{ route('seller.coupon.new') }}">New Coupon</a></li>
         <li><a href=""></a></li>
         <li><a href=""></a></li>
       </ul>

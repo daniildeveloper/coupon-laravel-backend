@@ -81,5 +81,12 @@
                 Чат
             </a>
         </li> --}}
+
+        <li>
+            <a href="{{ route('seller.coupon.new') }}">
+                <i class="fa fa-plus"></i>
+                Добавить купон
+            </a>
+        </li>
     </ul>
 </aside>

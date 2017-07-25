@@ -129,6 +129,9 @@ Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
 
         // confirm coupon
         Route::get('confirm', 'SellerController@confirmCoupon')->name('seller.coupons.confirm');
+
+        // NEW COUPON CREATION FORM
+        Route::get('new', 'SellerController@showSellerCouponCreationView')->name('seller.coupon.new');
     });
 
     // seller managers
