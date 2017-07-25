@@ -14,13 +14,13 @@
                 Купоны
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('seller.managers') }}">
                 <i class="fa fa-id-card">
-                </i>
+                </i>    
                 Менеджеры
             </a>
-        </li>
+        </li> --}}
         <li>
             <a href="{{ route('seller.orders') }}">
                 <i class="fa fa-list-ol">
@@ -35,13 +35,13 @@
                 Проверить купон
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('seller.clients') }}">
                 <i class="fa fa-address-book-o">
                 </i>
                 Лояльные клиенты
             </a>
-        </li>
+        </li> --}}
         <li>
             <a href="{{ route('seller.payments') }}">
                 <i class="fa fa-money">
@@ -49,13 +49,13 @@
                 Платежи
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('seller.payments.out') }}">
                 <i class="fa fa-money">
                 </i>
                 Вывод средств
             </a>
-        </li>
+        </li> --}}
         {{-- TODO: make active after referal creation --}}
         {{-- <li>
             <a href="{{ route('partners') }}">

@@ -3,7 +3,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2">
-            <a class="logo mt5" href="/"><img src="{{asset("images/logo-inline.png")}}" alt="Чики чики" title="Чики чики" style="width: 190px"></a>
+            <a class="logo mt5" href="/"><img src="{{asset("images/logo-inline.png")}}" alt="{{ env('APP_NAME') }}" title="{{ env('APP_NAME') }}" style="width: 190px"></a>
           </div>
           <div class="col-md-6 col-md-offset-4" style="margin-top: 15px">
             <div class="pull-right">
@@ -47,12 +47,12 @@
           </div>
           <div class="col-md-6">
             <ul class="login-register">
-              <li>
+              {{-- <li>
                 <a href="{{ route('favorites') }}">
                   <i class="fa fa-heart"></i>
                   Избранное
                 </a>
-              </li>
+              </li> --}}
               <li class="shopping-cart"><a href="{{route("shop.cart")}}"><i class="fa fa-shopping-cart"></i>Корзина</a></li>
               @if(Auth::user() === null)
                 <li><a class="popup-text" href="#login-dialog" data-effect="mfp-move-from-top"><i class="fa fa-sign-in"></i>Войти</a></li>

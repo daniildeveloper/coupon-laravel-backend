@@ -10,7 +10,7 @@ use App\Order;
 use App\OrderProduct;
 use Epay\Client as KazkomPay;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminatenate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use \Mail;
 use Epay;
