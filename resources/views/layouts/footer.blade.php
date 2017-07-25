@@ -45,7 +45,7 @@
                         </div>
                         <div class="widget-list">
                             <ul class="list-unstyled faq">
-                                <li><a href="{{route("c-add")}}">Разместить купон</a></li>
+                                <li><a href="{{route("seller.dashboard")}}">Разместить купон</a></li>
                                 {{-- <li><a href="#">Разместить акцию</a></li> --}}
                                 <li><a href="#">Запросить консультацию</a></li>
                                 <li><a href="{{ route('links') }}">Optional</a></li>

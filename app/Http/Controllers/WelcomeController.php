@@ -133,32 +133,32 @@ class WelcomeController extends Controller
     public function showSingleCoupon($id)
     {
         //просмотры пользователями
-        if (Auth::user() === null || Auth::user()->id != Seller::find(Product::find($id)->company_id)->user_id) {
-            if (count(DB::table('views')->where('day', Carbon::now()->toDateString())->get()) > 0) {
-                DB::table('views')->where('day', Carbon::now()->toDateString())->update([
-                    "count" => DB::table('views')->where('day', Carbon::now()->toDateString())->get()[0]->count + 1,
-                ]);
-            } else {
-                $view        = new Views();
-                $view->day   = Carbon::now()->toDateString();
-                $view->count = 1;
-                $view->save();
-            }
+        // if (Auth::user() === null || Auth::user()->id != Seller::find(Product::find($id)->company_id)->user_id) {
+        //     if (count(DB::table('views')->where('day', Carbon::now()->toDateString())->get()) > 0) {
+        //         DB::table('views')->where('day', Carbon::now()->toDateString())->update([
+        //             "count" => DB::table('views')->where('day', Carbon::now()->toDateString())->get()[0]->count + 1,
+        //         ]);
+        //     } else {
+        //         $view        = new Views();
+        //         $view->day   = Carbon::now()->toDateString();
+        //         $view->count = 1;
+        //         $view->save();
+        //     }
             DB::table('coupons')->where('id', $id)->update([
                 "views" => DB::table('coupons')->where('id', $id)->get()[0]->views + 1,
             ]);
-            DB::table('accounting_datas')->where('slug', 'views')->update(
-                ["value" => DB::table('accounting_datas')->where('slug', 'views')->get()[0]->value + 1]
-            );
-        }
+            // DB::table('accounting_datas')->where('slug', 'views')->update(
+            //     ["value" => DB::table('accounting_datas')->where('slug', 'views')->get()[0]->value + 1]
+            // );
+        // }
 
         $thisCoupon    = Product::find($id);
         $couponCompany = Seller::find($thisCoupon->company_id);
-        $couponsToo    = DB::table("coupons")->where("company_id", $thisCoupon->company_id)->get();
-        return view("coupon.single", [
-            "thisCoupon"    => $thisCoupon,
+        // $couponsToo    = DB::table("coupons")->where("company_id", $thisCoupon->company_id)->get();
+        return view("coupon", [
+            "product"    => $thisCoupon,
             "couponCompany" => $couponCompany,
-            "otherCoupons"  => $couponsToo,
+            // "otherCoupons"  => $couponsToo,
         ]);
     }
 

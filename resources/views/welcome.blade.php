@@ -28,9 +28,10 @@ CouponLand
                     <i class="fa fa-heart"></i>
                   </a>
                 </div> --}}
-              <header class="product-header"><img style="height: 260px" src="{{$product->image}}" alt="{{$product->title}}" title="{{$product->title}}">
+              <header class="product-header">
+                <img style="height: 260px" src="{{$product->image}}" alt="{{$product->title}}" title="{{$product->title}}">
                 <div class="product-quick-view">
-                  <a class="fa fa-eye popup-text" href="#product-quick-view-dialog-{{$product->id}}" data-effect="mfp-move-from-top" data-toggle="tooltip" data-placement="top" title="Посмотреть"></a>
+                  <a class="fa fa-eye" href="c/{{$product->id}}" data-effect="mfp-move-from-top" data-toggle="tooltip" data-placement="top" title="Посмотреть"></a>
                 </div>
                 {{-- <div class="product-secondary-image"><img style="height: 260px" src="/public/storage/{{$product->carousel_1}}" alt="{{$product->title}}" title="{{$product->title}}"></div> --}}
               </header>
@@ -59,52 +60,6 @@ CouponLand
               </div>
             </div>
           </div>
-          {{-- quick view dialog --}}
-        <div class="mfp-with-anim mfp-hide mfp-dialog mfp-dialog-big clearfix" id="product-quick-view-dialog-{{$product->id}}">
-          <div class="row">
-           {{--  <div class="col-md-7">
-              <div class="fotorama" data-nav="thumbs" data-allowfullscreen="1" data-thumbheight="100" data-thumbwidth="100">
-                <img src="/public/storage/{{$product->image}}" alt="{{$product->title}}" title="{{$product->title}}" 
-                style="width: 200px">
-                @if($product->carousel_1)
-                  <img src="/public/storage/{{$product->carousel_1}}" alt="{{$product->title}}" title="{{$product->title}}"> 
-                @endif
-                
-                @if($product->carousel_2)
-                  <img src="/public/storage/{{$product->carousel_2}}" alt="{{$product->title}}" title="{{$product->title}}"> 
-                @endif
-                @if($product->carousel_3)
-                  <img src="/public/storage/{{$product->carousel_3}}" alt="{{$product->title}}" title="{{$product->title}}"> 
-                @endif
-                @if($product->carousel_4)
-                  <img src="/public/storage/{{$product->carousel_4}}" alt="{{$product->title}}" title="{{$product->title}}"> 
-                @endif
-              </div>
-            </div>
- --}}
-            <div class="col-md-5">
-              <ul class="icon-group icon-list-rating text-color" title="4.5/5 rating">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-half-empty"></i></li>
-              </ul><small><a class="text-muted" href="#">оценили 4 купивших</a></small>
-              <h3>{{$product->title}}</h3>
-              <div>
-                {!! $product->description !!}
-              </div>
-              <p>До конца акции: <span id="countdown{{$product->id}}"></span></p>
-              <p></p>
-              <script>
-
-                
-              </script>
-            </div>
-          </div>
-          {{-- <hr><a class="btn btn-primary" href="#">Больше</a> --}}
-        </div>
-        {{-- end dialog --}}
 
         <div class="modal fade" id="email" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
           <div class="modal-dialog" role="document">

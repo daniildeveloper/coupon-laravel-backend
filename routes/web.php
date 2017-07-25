@@ -74,8 +74,6 @@ Route::group(['prefix' => 'favorites'], function () {
 
 Route::group(['prefix' => 'c'], function () {
     Route::get('/', 'CouponController@showAllCoupons')->name('c-all');
-    Route::get('/add', 'CompanyController@showNewCouponForm')->name('c-add');
-    Route::post('/new', 'CompanyController@createCoupon')->name('c-new');
     Route::get("/c/{cat}", "WelcomeController@showCategorie")->name("category");
     Route::get('/{id}', "WelcomeController@showSingleCoupon");
 });
