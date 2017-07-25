@@ -132,6 +132,9 @@ Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
 
         // NEW COUPON CREATION FORM
         Route::get('new', 'SellerController@showSellerCouponCreationView')->name('seller.coupon.new');
+
+        // CREATE COUPON
+        Route::post('create', 'SellerController@createCoupon')->name('seller.coupon.create');
     });
 
     // seller managers

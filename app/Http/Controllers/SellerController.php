@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\Manager;
 use App\Model\Client;
+use App\Model\CouponsCategory;
 use App\User;
+use App\Coupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use \Auth;
 use \DB;
-use App\Model\CouponsCategory;
+use Carbon\Carbon;
+use \Storage;
+use Illuminate\Http\File;
 
 class SellerController extends Controller
 {
@@ -92,16 +96,52 @@ class SellerController extends Controller
     public function showSellerHistory()
     {}
 
+    /**
+     * show sellers coupon creation view
+     * @return [type] [description]
+     */
     public function showSellerCouponCreationView()
     {
-      $couponCategories = CouponsCategory::all();
-      return view('seller.coupon.new', [
-          'couponCategories' => $couponCategories
+        $couponCategories = CouponsCategory::all();
+        return view('seller.coupon.new', [
+            'couponCategories' => $couponCategories,
         ]);
     }
 
     public function createCoupon(Request $request)
-    {}
+    {
+        $coupon                            = new Coupon();
+        $coupon->title                     = $request['title'];
+        $coupon->company_id                = $this->sellerId;
+        $coupon->description               = $request['content'];
+        $coupon->short_description         = $request['short_description'];
+        // $coupon->profit_type               = 1;
+        // $coupon->profit_all                = $request['clients_profit'];
+        $available_until                   = Carbon::parse($request->selectDateTime);
+        $coupon->available_until           = $available_until->format("Y-m-d H:m:s");
+        // $coupon->available_until_timestamp = $available_until->timestamp;
+        $coupon->image                     = Storage::putFile('company', new File($request->file('preview')));
+        $coupon->coupon_category              = $request["coupon_category"];
+        $coupon->is_show                   = 1;
+        if ($request['image1']) {
+            $coupon->carousel_1 = Storage::put("company", new File($request->file("image1")));
+        }
+
+        if ($request->file("image2") !== null) {
+            $coupon->carousel_2 = Storage::put("company", new File($request->file("image2")));
+        }
+
+        if ($request->file("image3") !== null) {
+            $coupon->carousel_3 = Storage::put("company", new File($request->file("image3")));
+        }
+
+        // if ($request->hasFile('preview')) {
+        //     // $file = Input::file;
+        // }
+        $coupon->save();
+        // dd($coupon);
+        return redirect()->back();
+    }
 
     /**
      * show list of all orders
@@ -174,10 +214,9 @@ class SellerController extends Controller
         ]);
     }
 
-
     public function checkCoupon(Request $request)
     {
-      // here goes coupons check logic
+        // here goes coupons check logic
     }
 
 }

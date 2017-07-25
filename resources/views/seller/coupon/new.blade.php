@@ -6,7 +6,7 @@
 
 @section('seller_content')
   <h2 class="text-center">Новый купон</h2>
-  <form action="#" enctype="multipart/form-data" method="POST">
+  <form action="{{ route('seller.coupon.create') }}" enctype="multipart/form-data" method="POST">
    {{ csrf_field() }}
           
     <div class="row">
@@ -32,9 +32,12 @@
         {{-- end fiel preiew input --}}
         
         <div class="col-md-12 col-sm-12">
+            <div class="form-group col-md-12">
+                <input required class="form-control" name="title" type="text" placeholder="Название акции" required data-toggle="tooltip" data-placement="right" title="Не более 60 символов">
+            </div>
             {{-- Короткое название акции --}}
             <div class="form-group col-md-12">
-                <input required class="form-control" name="coupon" type="text" placeholder="Короткое описание акции" required data-toggle="tooltip" data-placement="right" title="Не более 60 символов">
+                <input required class="form-control" name="short_description" type="text" placeholder="Короткое описание акции" required data-toggle="tooltip" data-placement="right" title="Не более 60 символов">
             </div>
 
             <div class="row">
@@ -58,7 +61,7 @@
                     </div>
                     {{-- todo: UI for date time picker --}}
                     <div class="form-group col-md-6 col-sm-12">
-                        <input class="form-control" name="selectDateTime" id="selectDateTime" value="" />
+                        <input class="form-control" name="selectDateTime" id="selectDateTime" value="" type="datetime-local" />
                     </div>
                 </div>
 
