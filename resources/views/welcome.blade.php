@@ -35,13 +35,13 @@ CouponLand
                 {{-- <div class="product-secondary-image"><img style="height: 260px" src="/public/storage/{{$product->carousel_1}}" alt="{{$product->title}}" title="{{$product->title}}"></div> --}}
               </header>
               <div class="product-inner">
-                <ul class="icon-group icon-list-rating icon-list-non-rated" title="not rated yet">
+                {{-- <ul class="icon-group icon-list-rating icon-list-non-rated" title="not rated yet">
                   <li><i class="fa fa-star"></i></li>
                   <li><i class="fa fa-star"></i></li>
                   <li><i class="fa fa-star"></i></li>
                   <li><i class="fa fa-star"></i></li>
                   <li><i class="fa fa-star"></i></li>
-                </ul>
+                </ul> --}}
                 <h5 class="product-title">{{$product->title}}</h5>
                 <p class="product-desciption">{!!$product->short_description!!}</p>
                 <div class="product-meta">
