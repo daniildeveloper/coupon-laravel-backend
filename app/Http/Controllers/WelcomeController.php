@@ -24,7 +24,7 @@ class WelcomeController extends Controller
         $this->coupon_categories = CouponsCategory::all();
 
         // russisanify
-        Carbon::setLocale("ru");
+        Carbon::setLocale('ru');
     }
     /**
      * Переход на главную страницу.

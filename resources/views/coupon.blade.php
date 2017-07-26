@@ -40,7 +40,7 @@
     <div>
       {!! $product->description !!}
     </div>
-    <p>До конца акции: <span id="countdown{{$product->id}}"></span></p>
+    <p>Конец акции: {{ \Carbon\Carbon::parse($product->available_until)->formatLocalized(' %d / %m %Y') }}</p>
     
     <a class="btn btn-sm" href="{{route("shop.to-cart", ["id" => $product->id])}}"><i class="fa fa-shopping-cart"></i> В корзину</a>
     <button class="btn btn-sm " data-target="#email" data-toggle="modal">Быстрый заказ</button>

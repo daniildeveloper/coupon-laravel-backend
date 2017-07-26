@@ -122,7 +122,7 @@ class ShoppingCartController extends Controller
             "phones" => [
                 $company->seller_primary_phone,
                 $company->seller_second_phone
-            ]
+            ],
             'deal'       => $deal,
         ];
         Mail::send('email.order', $data, function ($message) use ($request, $data) {
