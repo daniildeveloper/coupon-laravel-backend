@@ -172,17 +172,6 @@ a[x-apple-data-detectors=true] {
       </div>
       
       @yield('content')
-
-<div align="center" class="button-container center" style="padding-right: 10px; padding-left: 10px; padding-top:10px; padding-bottom:10px;">
-  <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top:10px; padding-bottom:10px;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:50px; v-text-anchor:middle; width:182px;" arcsize="8%" strokecolor="#C3CF1B" fillcolor="#C3CF1B"><w:anchorlock/><center style="color:#ffffff; font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif; font-size:20px;"><![endif]-->
-    <div style="color: #ffffff; background-color: #C3CF1B; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; max-width: 162px; width: 122px; width: auto; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent; padding-top: 5px; padding-right: 20px; padding-bottom: 5px; padding-left: 20px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; text-align: center; mso-border-alt: none;">
-      <span style="font-size:12px;line-height:24px;"><span style="font-size: 20px; line-height: 40px;" data-mce-style="font-size: 20px;">GO TO SHOP</span></span>
-    </div>
-  <!--[if mso]></center></v:roundrect></td></tr></table><![endif]-->
-</div>
-
-                  
-                  
                     <div style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
   <!--[if (mso)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px;padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><table width="100%" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
   <div align="center"><div style="border-top: 1px solid transparent; width:100%; line-height:1px; height:1px; font-size:1px;">&#160;</div></div>

@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Company;
 use App\Coupon as Product;
-use App\CouponCode; 
+use App\Deal;
 use App\Order;
-use App\OrderProduct;
+use Epay;
 use Epay\Client as KazkomPay;
 use Illuminate\Http\Request;
-use Illuminatenate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use \Mail;
-use Epay;
+use Carbon\Carbon;
+use \DB;
 
 class ShoppingCartController extends Controller
 {
@@ -101,49 +101,33 @@ class ShoppingCartController extends Controller
     }
 
     public function createOrderWithoutReg(Request $request, $id)
-    {
-        $email = $request['email'];
+    {   
+        $coupon  = count(DB::table('coupons')->where('id', $id)->get()) > 0 ? DB::table('coupons')->where('id', $id)->get()[0] : redirect('/');
+        $company = Company::find($coupon->company_id);
 
-        $order            = new Order();
-        $order->type      = 2;
-        $order->status    = 1;
-        $order->user      = $email;
-        $order->coupon_id = $id;
-        $order->save();
-
-        // todo: send invation link to email
-
-        $orderProduct             = new OrderProduct();
-        $orderProduct->order_id   = $order->id; //
-        $orderProduct->product_id = $id;
-        $order->save();
-
-        $product = Product::find($id);
-        $company = Company::find($product->company_id);
-
-        $coupon_code             = new CouponCode();
-        $coupon_code->coupon_id  = $id;
-        $coupon_code->company_id = Product::find($id)->company_id;
-        if (Auth::user() != null) {
-            $coupon_code->user_id = Auth::user()->id;
-        }
-        $coupon_code->code    = rand(1000, 9999);
-        $coupon_code->confirm = rand(1000, 9999);
-        $coupon_code->client  = $request['email'];
-        $coupon_code->save();
-
-        $user_email = "aigul@chiki-chiki.kz";
+        $deal                  = new Deal();
+        $deal->coupon_id       = $id;
+        $deal->company_id      = $company->id;
+        $deal->user_email      = $request['email'];
+        $deal->user_code       = rand(10000, 99999);
+        $deal->company_code    = rand(10000, 99999);
+        $deal->expiration_date = Carbon::now()->addWeeks(2);
+        $deal->save();
 
         $data = [
             'email'      => $request['email'],
-            'coupon'     => Product::find($id)->coupon,
-            "couponCode" => $coupon_code->id,
-            "address"    => $company->address,
-            "company"    => $company->name,
+            'coupon'     => Product::find($id),
+            "address"    => $company->seller_address,
+            "company"    => $company->seller_name,
+            "phones" => [
+                $company->seller_primary_phone,
+                $company->seller_second_phone
+            ]
+            'deal'       => $deal,
         ];
-        Mail::send('emails.order', $data, function ($message) use ($request, $data) {
-            $message->from("aigul@chiki-chiki.kz", 'Айгуль из Чики Чики');
-            $message->sender("aigul@chiki-chiki.kz", 'Айгуль из Чики Чики');
+        Mail::send('email.order', $data, function ($message) use ($request, $data) {
+            $message->from(env('SUPPORT_EMAIL'), env('SUPPORT_NAME'));
+            $message->sender(env('SUPPORT_EMAIL'), env('SUPPPORT_NAME'));
 
             $message->to($request['email']);
 
@@ -151,25 +135,22 @@ class ShoppingCartController extends Controller
 
             $message->priority(3);
         });
-        return redirect()->action("WelcomeController@showIndexPage", [
-            'alert'     => true,
-            "alertText" => "Письмо с кодом купона отправленно к Вам на почту.",
-            "alertType" => "success"]);
+        return redirect()->back();
     }
 
     public function paySentOrder($user_id = 1, $order_id = 1, $amount = 200)
     {
         $regular_pay = Epay::regularPay([
-           'order_id' => rand(111111111111, 999999999999999),
-           'currency' => '398',
-           'amount' => '50',
-           'email'  => 'client@kkb.kz',
-           'hashed' => true,
-           'reference' => '150218150813'
-       ]);
+            'order_id'  => rand(111111111111, 999999999999999),
+            'currency'  => '398',
+            'amount'    => '50',
+            'email'     => 'client@kkb.kz',
+            'hashed'    => true,
+            'reference' => '150218150813',
+        ]);
 
-        $xml =  simplexml_load_string($regular_pay->generateUrl());
-        $xml_to_array  = json_decode(json_encode((array)$xml), TRUE);
+        $xml          = simplexml_load_string($regular_pay->generateUrl());
+        $xml_to_array = json_decode(json_encode((array) $xml), true);
 
         // check american express card
 
@@ -187,9 +168,8 @@ class ShoppingCartController extends Controller
         $payment_array = $xml_to_array['payment']['@attributes'];
         dd($payment_array);
 
-        if($payment_array['message'] == "Approved")
-        {
-            dd( $payment_array);
+        if ($payment_array['message'] == "Approved") {
+            dd($payment_array);
         }
 
         dd(false);
@@ -212,6 +192,5 @@ class ShoppingCartController extends Controller
 
         return view("pay");
     }
-
 
 }
