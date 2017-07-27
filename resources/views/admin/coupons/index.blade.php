@@ -92,10 +92,10 @@
                                 </td>
                             {{-- name --}}
                                 <td>
-                                    {{$coupon->coupon}}
+                                    <a href="{{route("single-coupon", ["id" => $coupon->id])}}"> {{$coupon->title}} </a>
                                 </td>
                                 <td>
-                                    <img src="{{asset("/public/storage/$coupon->image")}}" alt="" class="avatar">
+                                    <img src="{{asset("$coupon->image")}}" alt="" class="avatar">
                                 </td>
                                 <td>
                                     {{\App\Company::find($coupon->company_id)->name}}
@@ -119,23 +119,24 @@
                                         Просмотр
                                     </a>
                                     @if($coupon->is_show != 0)
-                                    <a class="btn btn-danger btn-xs" href="{{url('backend/coupon/hide/'. $coupon->id)}}">
+                                    <a class="btn btn-danger btn-xs" href="{{ route('coupon-h', ['id' => $coupon->id]) }}">
                                         <i class="fa fa-trash-o">
                                         </i>
                                         Скрыть
                                     </a>
                                     @else
-                                    <a class="btn btn-success btn-xs" href="{{url('backend/coupon/publish/'. $coupon->id)}}">
+                                    <a class="btn btn-success btn-xs" href="{{ route('coupon-p', ['id' => $coupon->id]) }}">
                                         <i class="fa fa-pencil">
                                         </i>
                                         опубликовать
                                     </a>
                                     @endif
-                                    <a class="btn btn-danger btn-xs" href="{{route("trash.moveTo", ["id" => $coupon->id, "table" => "coupons"])}}">
+                                    {{-- TODO: delete coupons --}}
+                                    {{-- <a class="btn btn-danger btn-xs" href="{{route("trash.moveTo", ["id" => $coupon->id, "table" => "coupons"])}}">
                                         <i class="fa fa-trash">
                                         </i>
                                         В корзину
-                                    </a>
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach
