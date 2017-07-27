@@ -32,6 +32,7 @@ class CreateCouponsTable extends Migration
             $table->boolean('is_hit')->default(0);
             $table->boolean('is_new')->default(true);
             $table->boolean('is_border')->default(0);
+            $table->integer('costs')->nullable(); // publish fee
             $table->string('image');
             $table->integer('company_id')->default(1);
             $table->timestamps();
