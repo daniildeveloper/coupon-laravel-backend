@@ -10,37 +10,16 @@
    {{ csrf_field() }}
           
     <div class="row">
-
-        {{-- file preview input --}}
-        <div class="col-md-12 col-sm-12">
-            <div class="col-md-4">
-                <div class="setting image_picker">
-                  <div class="settings_wrap">
-                    <label class="drop_target">
-                      <div class="image_preview"></div>
-                      <input required="true" id="inputFile" type="file" name="preview" accept="image/jpeg,image/png"/>
-                    </label>
-                    <div class="settings_actions vertical">
-                        <a class="disabled" data-action="remove_current_image">
-                            <i class="fa fa-ban"></i>Удалить изображение</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="setting"></div>
-            </div>
-        </div>
-        {{-- end fiel preiew input --}}
-
         {{-- LARAVEL FILE MANAGER --}}
         <div class="input-group">
            <span class="input-group-btn">
              <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-               <i class="fa fa-picture-o"></i> Choose
+               <i class="fa fa-picture-o"></i> Выбрать изображение
              </a>
            </span>
-           <input id="thumbnail" class="form-control" type="text" name="filepath">
+           <input id="thumbnail" class="form-control" type="text" name="preview">
          </div>
-         <img id="holder" style="margin-top:15px;max-height:100px;">
+         <img id="holder" style="margin-top:15px;max-height:300px;">
         {{-- END LARAVEL FILE MANAGER --}}
         
         <div class="col-md-12 col-sm-12">
@@ -53,20 +32,6 @@
             </div>
 
             <div class="row">
-                {{-- <div class="form-group  col-md-7">
-                  <div class="col-md-6 col-sm-12">
-                      <input required name="clients_profit" placeholder="выгоды клиента" class="form-control" type="number"
-                             step="0.1">
-                  </div>
-                  <div class="col-md-6">
-                      <select required class="form-control" name="clients_profit_type" id="">
-                          @foreach($cats as $categorie)
-                              <option value="{{$categorie->id}}">{{$categorie->name}}</option>
-                          @endforeach
-                      </select>
-                  </div>
-                </div> --}}
-
                 <div class="form-group col-md-7">
                     <div class="form-group col-md-6 col-sm-12">
                         <label class="form-control" for="selectDateTime">Действителен до:</label>
@@ -93,34 +58,6 @@
             
         </div>
     </div>
-      {{-- <div class="wrapper">
-        <div class="box">
-          <div class="js--image-preview"></div>
-          <div class="upload-options">
-            <label>
-              <input required="true" type="file" class="image-upload" name="image1" accept="image/*" />
-            </label>
-          </div>
-        </div>
-
-        <div class="box">
-          <div class="js--image-preview"></div>
-          <div class="upload-options">
-            <label>
-              <input  type="file" class="image-upload" name="image2" accept="image/*" />
-            </label>
-          </div>
-        </div>
-
-        <div class="box">
-          <div class="js--image-preview"></div>
-          <div class="upload-options">
-            <label>
-              <input type="file" class="image-upload" name="image3" accept="image/*" />
-            </label>
-          </div>
-        </div>
-      </div> --}}
     <textarea required placeholder="Описание" name="content" id="textarea" cols="30" rows="10">
         Описание купона
     </textarea>

@@ -119,8 +119,14 @@ class SellerController extends Controller
         // $coupon->profit_all                = $request['clients_profit'];
         $available_until                   = Carbon::parse($request->selectDateTime);
         $coupon->available_until           = $available_until->format("Y-m-d H:m:s");
-        // $coupon->available_until_timestamp = $available_until->timestamp;
-        $coupon->image                     = Storage::putFile('company', new File($request->file('preview')));
+
+        // 
+        $imagePathString = $request['preview'];
+        $imagePathArray = explode('/', $imagePathString);
+        $imagePathArray[1] = 'storage';
+        $imagePathString = implode('/', $imagePathArray);
+
+        $coupon->image                     =    $imagePathString;
         $coupon->coupon_category              = $request["coupon_category"];
         $coupon->is_show                   = 1;
         if ($request['image1']) {
