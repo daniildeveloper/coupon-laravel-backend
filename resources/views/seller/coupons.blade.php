@@ -17,7 +17,7 @@
                 @endif
                 <div class="favorites-link ">
                 {{-- TODO: inline coupon edit --}}
-                  <a href="#" class="favorites">
+                  <a href="{{ route('seller.coupon.edit', ['id' => $product->id]) }}" class="favorites">
                     <i class="fa fa-edit"></i>
                   </a>
                 </div>

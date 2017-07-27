@@ -9,9 +9,9 @@
   <form action="{{ route('seller.coupon.create') }}" enctype="multipart/form-data" method="POST">
    {{ csrf_field() }}
           
-    <div class="row">
         {{-- LARAVEL FILE MANAGER --}}
-        <div class="input-group">
+        <div class="col-md-12">
+          <div class="input-group">
            <span class="input-group-btn">
              <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                <i class="fa fa-picture-o"></i> Выбрать изображение
@@ -19,7 +19,9 @@
            </span>
            <input id="thumbnail" class="form-control" type="text" name="preview">
          </div>
-         <img id="holder" style="margin-top:15px;max-height:300px;">
+         <img id="holder" style="margin-top:15px;min-height:300px;">
+        </div>
+        
         {{-- END LARAVEL FILE MANAGER --}}
         
         <div class="col-md-12 col-sm-12">
@@ -54,9 +56,9 @@
                       </select>
                   </div>
                 </div>
-            </div>
             
-        </div>
+
+
     </div>
     <textarea required placeholder="Описание" name="content" id="textarea" cols="30" rows="10">
         Описание купона

@@ -133,6 +133,12 @@ Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
 
         // CREATE COUPON
         Route::post('create', 'SellerController@createCoupon')->name('seller.coupon.create');
+
+        // show edit coupon view
+        Route::get('edit/{id}', 'SellerController@editCoupon')->name('seller.coupon.edit');
+
+        // update coupon
+        Route::post('update', 'SellerController@updateCoupon')->name('seller.coupon.update');
     });
 
     // seller managers

@@ -1,54 +1,41 @@
 @extends('seller.layout')
 
 @section('seller_title')
-Редактирование купона | {{ $product->title }}
+Редактирование купона | {{ $coupon->title }}
 @endsection
 
 @section('seller_content')
-  <h2 class="text-center">Новый купон</h2>
-  <form action="{{ route('seller.coupon.create') }}" enctype="multipart/form-data" method="POST">
-   {{ csrf_field() }}
-          
+  <h2 class="text-center">{{ $coupon->title }} | Редактировние</h2>
+  <form action="{{ route('seller.coupon.update') }}" enctype="multipart/form-data" method="POST">
+    {{ csrf_field() }}
+    <input type="hidden" value="{{ $coupon->id }}" name="id">
     <div class="row">
-        {{-- file preview input --}}
-        <div class="col-md-12 col-sm-12">
-            <div class="col-md-4">
-                <div class="setting image_picker">
-                  <div class="settings_wrap">
-                    <label class="drop_target">
-                      <div class="image_preview"></div>
-                      <input required="true" id="inputFile" type="file" name="preview" accept="image/jpeg,image/png"/>
-                    </label>
-                    <div class="settings_actions vertical">
-                        <a class="disabled" data-action="remove_current_image">
-                            <i class="fa fa-ban"></i>Удалить изображение</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="setting"></div>
-            </div>
+
+        {{-- LARAVEL FILE MANAGER --}}
+        <div class="col-md-12">
+          <div class="input-group">
+           <span class="input-group-btn">
+             <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+               <i class="fa fa-picture-o"></i> Выбрать изображение
+             </a>
+           </span>
+           <input id="thumbnail" class="form-control" type="text" name="preview" value="{{ $coupon->image }}">
+         </div>
+         <img id="holder" class="holder" style="margin:15px auto;width: 50%; height: auto; text-align: center" src="{{ $coupon->image }}">
         </div>
-        {{-- end file preiew input --}}
-        
+        {{-- END LARAVEL FILE MANAGER --}}
+                
         <div class="col-md-12 col-sm-12">
             <div class="form-group col-md-12">
-                <input required class="form-control" name="title" type="text" placeholder="Название акции" required data-toggle="tooltip" data-placement="right" title="Не более 60 символов">
+                <input required class="form-control" name="title" type="text" placeholder="Название акции" required data-toggle="tooltip" data-placement="right" title="Не более 60 символов" value="{{ $coupon->title }}">
             </div>
             {{-- Короткое название акции --}}
             <div class="form-group col-md-12">
-                <input required class="form-control" name="short_description" type="text" placeholder="Короткое описание акции" required data-toggle="tooltip" data-placement="right" title="Не более 60 символов">
+                <input required class="form-control" name="short_description" type="text" placeholder="Короткое описание акции" required data-toggle="tooltip" data-placement="right" title="Не более 60 символов" value="{{ $coupon->short_description }}">
             </div>
 
             <div class="row">
-                <div class="form-group col-md-7">
-                    <div class="form-group col-md-6 col-sm-12">
-                        <label class="form-control" for="selectDateTime">Действителен до:</label>
-                    </div>
-                    {{-- todo: UI for date time picker --}}
-                    <div class="form-group col-md-6 col-sm-12">
-                        <input class="form-control" name="selectDateTime" id="selectDateTime" value="" type="datetime-local" />
-                    </div>
-                </div>
+                
 
                 <div class="form-group  col-md-7">
                   <div class="col-md-6 col-sm-12">
@@ -82,11 +69,13 @@
   {{-- <script src="{{ asset("js/moment-with-locales.min.js") }}"></script>
   <script src="{{ asset('bootstrap-material-date-timepicker/js/bootstrap-material-datetimepicker.js') }}"></script> --}}
   <script>
+
     tinymce.init({
             selector: '#textarea',
             language: "ru",
             language_url: '/langs/ru.js'
           });
+
     // $('#selectDateTime').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD H:m:s',
     //         lang: 'ru'
     //       });

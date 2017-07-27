@@ -14112,4 +14112,9 @@ i.material-icons {
   height: 201px;
 }
 
+.holder {
+  max-width: 80%;
+  height: auto;
+}
+
 /*# sourceMappingURL=app.css.map */

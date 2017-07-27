@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Coupon;
 use App\Manager;
 use App\Model\Client;
 use App\Model\CouponsCategory;
 use App\User;
-use App\Coupon;
+use Carbon\Carbon;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use \Auth;
 use \DB;
-use Carbon\Carbon;
 use \Storage;
-use Illuminate\Http\File;
 
 class SellerController extends Controller
 {
@@ -110,25 +110,25 @@ class SellerController extends Controller
 
     public function createCoupon(Request $request)
     {
-        $coupon                            = new Coupon();
-        $coupon->title                     = $request['title'];
-        $coupon->company_id                = $this->sellerId;
-        $coupon->description               = $request['content'];
-        $coupon->short_description         = $request['short_description'];
+        $coupon                    = new Coupon();
+        $coupon->title             = $request['title'];
+        $coupon->company_id        = $this->sellerId;
+        $coupon->description       = $request['content'];
+        $coupon->short_description = $request['short_description'];
         // $coupon->profit_type               = 1;
         // $coupon->profit_all                = $request['clients_profit'];
-        $available_until                   = Carbon::parse($request->selectDateTime);
-        $coupon->available_until           = $available_until->format("Y-m-d H:m:s");
+        $available_until         = Carbon::parse($request->selectDateTime);
+        $coupon->available_until = $available_until->format("Y-m-d H:m:s");
 
-        // 
-        $imagePathString = $request['preview'];
-        $imagePathArray = explode('/', $imagePathString);
+        //
+        $imagePathString   = $request['preview'];
+        $imagePathArray    = explode('/', $imagePathString);
         $imagePathArray[1] = 'storage';
-        $imagePathString = implode('/', $imagePathArray);
+        $imagePathString   = implode('/', $imagePathArray);
 
-        $coupon->image                     =    $imagePathString;
-        $coupon->coupon_category              = $request["coupon_category"];
-        $coupon->is_show                   = 1;
+        $coupon->image           = $imagePathString;
+        $coupon->coupon_category = $request["coupon_category"];
+        $coupon->is_show         = 1;
         if ($request['image1']) {
             $coupon->carousel_1 = Storage::put("company", new File($request->file("image1")));
         }
@@ -147,6 +147,45 @@ class SellerController extends Controller
         $coupon->save();
         // dd($coupon);
         return redirect()->back();
+    }
+
+    public function editCoupon($id)
+    {
+        $coupon = Coupon::find($id);
+        if ($coupon->company_id != $this->sellerId) {
+            return redirect()->route('seller.coupon.new');
+        }
+
+        return view('seller.coupon.edit', [
+            'coupon' => $coupon,
+            'couponCategories' => CouponsCategory::all()
+        ]);
+    }
+
+    /**
+     * [updateCoupon description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function updateCoupon(Request $request)
+    {
+        if ($request['preview'] !== Coupon::find($request['id'])->image) {
+            $imagePathString   = $request['preview'];
+            $imagePathArray    = explode('/', $imagePathString);
+            $imagePathArray[1] = 'storage';
+            $imagePathString   = implode('/', $imagePathArray);
+        } else {
+            $imagePathString = $request['preview'];
+        }
+
+        DB::table('coupons')->where('id', $request['id'])->update([
+            'title'             => $request['title'],
+            'description'       => $request['content'],
+            'short_description' => $request['short_description'],
+            'image'             => $imagePathString,
+            'coupon_category'   => $request['coupon_category'],
+        ]);
+        return redirect()->route('seller.coupon.edit', ['id' => $request['id']]);
     }
 
     /**
