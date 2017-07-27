@@ -33,8 +33,16 @@
                 <h3 class="prod_title">
                     {{$coupon->title}}
                 </h3>
+                <hr>
+                <p>{{ App\Company::find($coupon->company_id)->seller_name }}</p>
+                <p>
+                    <a href="tel:{{ App\Company::find($coupon->company_id)->seller_primary_phone }}">{{ App\Company::find($coupon->company_id)->seller_primary_phone }}</a>
+                </p>
+                <hr>
                 {!!$coupon->description!!}
+                <hr>
                 @if($coupon->costs === null)
+
                 <form action="{{route("coupon-price", ["id" => $coupon->id])}}">
                     <div class="form-group">
                         <div class="input-group">
