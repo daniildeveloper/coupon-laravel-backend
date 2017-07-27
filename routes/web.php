@@ -337,5 +337,22 @@ Route::group([
     });
 });
 /**
- *  END ADMIN
+ * ===============================
+ *      END ADMIN
+ * ===============================
+ */
+
+/**
+ * ===============================
+ *  ROUTES FOR ADDITIONAL PAGES
+ * ===============================
+ */
+Route::group(['prefix' => 'newspaper'], function () {
+    Route::get('/', "NewsController@index")->name('news');
+    Route::get('{id}', 'NewsController@getNewsByID')->name('news.id');
+});
+/**
+ * ===============================
+ * END ROUTES FOR ADDIONAL PAGES
+ * ===============================
  */

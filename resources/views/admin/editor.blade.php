@@ -25,7 +25,7 @@
                     color: #337ab7;
                   }
                 </style>
-                  <a target="_blank" href="{{url($previewUrl)}}" class="btn btn-primary" >
+                  <a target="_blank" href="{{url($previewUrl)}}/{{ $entity->id }}" class="btn btn-primary" >
                     Посмотреть
                   </a>
                 </li>
@@ -64,7 +64,7 @@
 @endsection
 
 @section("scripts")
-<script src="{{asset("vendors/tinymce/tinymce.min.js")}}"></script>
+<script src="{{asset("tinymce/tinymce.min.js")}}"></script>
   <script>
   window.onload = function() {
     var editor_config = {
