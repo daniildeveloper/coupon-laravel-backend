@@ -25,7 +25,7 @@
                     color: #337ab7;
                   }
                 </style>
-                  <a target="_blank" href="{{url($previewUrl)}}/{{ $entity->id }}" class="btn btn-primary" >
+                  <a target="_blank" href="{{url($previewUrl)}}" class="btn btn-primary" >
                     Посмотреть
                   </a>
                 </li>

@@ -351,6 +351,7 @@ Route::group(['prefix' => 'newspaper'], function () {
     Route::get('/', "NewsController@index")->name('news');
     Route::get('{id}', 'NewsController@getNewsByID')->name('news.id');
 });
+Route::get('faq', 'FaqController@index')->name('faq');
 /**
  * ===============================
  * END ROUTES FOR ADDIONAL PAGES
