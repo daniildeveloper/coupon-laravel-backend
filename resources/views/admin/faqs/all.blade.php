@@ -15,19 +15,6 @@
                 </small>
             </h3>
         </div>
-        {{-- <div class="title_right">
-            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                    <input class="form-control" placeholder="Search for..." type="text">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                Go!
-                            </button>
-                        </span>
-                    </input>
-                </div>
-            </div>
-        </div> --}}
     </div>
     <div class="clearfix">
     </div>
@@ -46,7 +33,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{route("faq.new")}}" class="btn btn-success">Добавить</a>
+                            
                         </li>
                     </ul>
                     <div class="clearfix">
@@ -56,6 +43,7 @@
                     <p>
                         Все вопросы
                     </p>
+                    <a href="{{route("faq.new")}}" class="btn btn-success">Добавить</a>
                     <!-- start project list -->
                     @foreach($faqs as $faq)
                         <div class="container row">

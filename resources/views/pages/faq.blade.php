@@ -8,7 +8,8 @@
   @if(count($quests) === 0)
     @include('layouts.empty')
   @endif
-  @foreach($quests as $q)
+  <div class="container">
+    @foreach($quests as $q)
     <div class="panel-group" id="accordion{{$q->id}}">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -24,5 +25,7 @@
         </div>
     </div>
   @endforeach
+  </div>
+  
 <div class="gap gap-small"></div>
 @endsection

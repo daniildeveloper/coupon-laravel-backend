@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\FaqQuest as Quest;
+use App\Model\Faq as Quest;
 use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
-    protected $table = "faq_quests";
+    protected $table = "faqs";
     /**
      * show list of faq
      * @return [type] [description]
@@ -17,7 +17,7 @@ class FaqController extends Controller
     public function get()
     {
         return view("admin.faqs.all", [
-            "faqs" => DB::table("faq_quests")->where("is_show", 1)->get(),
+            "faqs" => DB::table($this->table)->paginate(10),
         ]);
 
     }
@@ -45,7 +45,7 @@ class FaqController extends Controller
 
     public function update(Request $request)
     {
-        \DB::table("faq_quests")->where("id", $request->id)->update([
+        \DB::table($this->table)->where("id", $request->id)->update([
             "answer" => $request["text"],
         ]);
         return redirect()->back();
@@ -67,34 +67,5 @@ class FaqController extends Controller
             "content"                      => $q->answer,
             "additional_input_placeholder" => $q->quest,
         ]);
-    }
-
-    /**
-     * [toggleShowInFooter description]
-     * @param  [type] $id [description]
-     * @return [type]     [description]
-     */
-    public function toggleShowInFooter($id)
-    {
-        $faq = DB::table("faq_quests")->where("id", $id);
-
-        if ($faq->get()[0]->show_in_footer === 0) {
-            $faq->update(["show_in_footer" => 1]);
-            return redirect()->back();
-        }
-
-        $faq->update(["show_in_footer" => 0]);
-        return redirect()->back();
-    }
-
-    /**
-     * set footer position
-     * @param [type] $id  [description]
-     * @param [type] $pos [description]
-     */
-    public function setFooterPos(Request $request)
-    {
-        DB::table($this->table)->where("id", $request->id)->update(["footer_position" => $request->pos]);
-        return redirect()->back();
     }
 }
