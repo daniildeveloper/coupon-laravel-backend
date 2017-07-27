@@ -26,6 +26,9 @@ class QazKomController extends Controller
 
     public function pay() {
       $signature = $this->client->processRequest(1, $this->client->getCurrencyId('KZT'), 500);
-      dd($signature);
+      return view('pay.qazkom', [
+          "xml" => $signature,
+          "orderId" => 1
+        ]);
     }
 }
