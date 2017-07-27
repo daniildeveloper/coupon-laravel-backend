@@ -57,10 +57,10 @@
                         <form action="{{route("categories.update", ["id" => $c->id])}}">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <i class="fa fa-{{$c->icon}}"></i>
+                                    <i class="{{$c->icon}}"></i>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" name="name" value="{{$c->name}}" class="form-control">
+                                    <input type="text" name="name" value="{{$c->title}}" class="form-control">
                                 </div>
                                 <div class="col-md-2">
                                     <button type="submit" class="btn btn-success">Изменить</button>

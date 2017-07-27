@@ -18,7 +18,7 @@
       <div class="x_content">
         <ul>
         @foreach($cats as $cat)
-          <li><i class="fa fa-{{$cat->icon}}"></i> <span>{{$cat->name}}</span></li>
+          <li><i class="fa fa-{{$cat->icon}}"></i> <span>{{$cat->title}}</span></li>
         @endforeach
         </ul> 
       </div>

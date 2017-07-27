@@ -1,0 +1,50 @@
+@extends("email.layout")
+
+@section("title")
+{{$coupon}} | Цена за размещение
+@endsection
+
+@section("content")
+    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td class="navbar navbar-inverse" align="center">
+                <!-- This setup makes the nav background stretch the whole width of the screen. -->
+                <table width="650px" cellspacing="0" cellpadding="3" class="container">
+                    <tr class="navbar navbar-inverse">
+                        <td colspan="4"><a class="brand" href="http://chiki-chiki.kz">Чики Чики</a></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#FFFFFF" align="center">
+                <table width="650px" cellspacing="0" cellpadding="3" class="container">
+                    <tr>
+                        <td>Здравствуйте, {{$name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Цена за месячное размещение купона/рекламы на сайте составит: {{$price}} тг</td>
+                    </tr>
+                    <tr>
+                        <td>Купон: {{$coupon}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{$coupon}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#FFFFFF" align="center">
+                <table width="650px" cellspacing="0" cellpadding="3" class="container">
+                    <tr>
+                        <td>
+                            <hr>
+                            <p>Спасибо, что с нами!</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    @endsection

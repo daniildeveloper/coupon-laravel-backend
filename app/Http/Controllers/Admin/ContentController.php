@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\CouponCategories;
+use App\Model\CouponsCategory;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
@@ -27,7 +28,14 @@ class ContentController extends Controller
     public function showCategories()
     {
         return view("admin.categorie.all", [
-            "cats" => CouponCategories::all(),
+            "cats" => CouponsCategory::all(),
         ]);
+    }
+
+    public function updateCategory(Request $request, $id) {
+        \DB::table('coupons_categories')->where('id', $id)->update([
+                'title' => $request['name']
+            ]);
+        return redirect()->back();
     }
 }

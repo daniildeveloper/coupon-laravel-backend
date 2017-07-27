@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Company;
 use App\Coupon;
-use App\CouponCategories;
+use App\Model\CouponsCategory;
 use App\Http\Controllers\Controller;
 // use App\Payment;
 use App\User;
@@ -130,9 +130,9 @@ class AdminController extends Controller
         $data['email']  = $user->email;
         $data['price']  = $request['price'];
         $data["coupon"] = Coupon::find($id)->title;
-        Mail::send('emails.pricechangenotification', $data, function ($message) use ($data) {
-            $message->from("aigul@chiki-chiki.kz", 'Айгуль из Чики Чики');
-            $message->sender("aigul@chiki-chiki.kz", 'Айгуль из Чики Чики');
+        Mail::send('email.pricechangenotification', $data, function ($message) use ($data) {
+            $message->from(env('SUPPORT_EMAIL'), env('SUPPORT_NAME') );
+            $message->sender(env('SUPPORT_EMAIL'), env('SUPPORT_NAME'));
 
             $message->to($data['email']);
 
@@ -207,7 +207,7 @@ class AdminController extends Controller
      */
     public function showCategories()
     {
-        $categories = CouponCategories::all();
+        $categories = CouponsCategory::all();
         return view('admin.coupons.categories', [
             'cats' => $categories,
         ]);
