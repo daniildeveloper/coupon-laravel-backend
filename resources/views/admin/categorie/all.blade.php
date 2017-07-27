@@ -57,6 +57,7 @@
                         <form action="{{route("categories.update", ["id" => $c->id])}}">
                             <div class="row">
                                 <div class="col-md-2">
+                                {{-- TODO: icons picker --}}
                                     <i class="{{$c->icon}}"></i>
                                 </div>
                                 <div class="col-md-8">
