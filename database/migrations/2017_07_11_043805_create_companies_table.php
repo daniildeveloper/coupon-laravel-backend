@@ -23,7 +23,7 @@ class CreateCompaniesTable extends Migration
             $table->string('seller_logo')->default('images/logo-inline.png');
             $table->string('seller_second_image')->nullable();
             $table->integer('seller_company_type');
-            // $table->integer
+            $table->boolean('confirmed')->default(true);
             $table->timestamps();
         });
     }

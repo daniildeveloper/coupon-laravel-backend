@@ -59,8 +59,8 @@
                 <li><a class="popup-text" href="#register-dialog" data-effect="mfp-move-from-top"><i class="fa fa-edit"></i>Регистрация</a></li>
               @else
                 <li><a href="{{route("cabinet")}}"><i class="fa fa-user"></i>{{Auth::user()->name}}</a></li>
-                @if(Auth::user()->type === 777)
-                <li><a href="/backend"><i class="fa fa-cogs"></i>Админка</a></li>
+                @if(Auth::user()->role === 999)
+                <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-cogs"></i>Админка</a></li>
                 @endif
                 <li>
 

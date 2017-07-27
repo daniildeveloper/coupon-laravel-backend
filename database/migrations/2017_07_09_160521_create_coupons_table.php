@@ -30,6 +30,7 @@ class CreateCouponsTable extends Migration
             $table->integer('views')->nullable();
             $table->boolean('is_show')->default(0);
             $table->boolean('is_hit')->default(0);
+            $table->boolean('is_new')->default(true);
             $table->boolean('is_border')->default(0);
             $table->string('image');
             $table->integer('company_id')->default(1);

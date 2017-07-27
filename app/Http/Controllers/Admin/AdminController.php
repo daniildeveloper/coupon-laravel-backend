@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Company;
 use App\Coupon;
 use App\CouponCategories;
-use App\Payment;
+use App\Http\Controllers\Controller;
+// use App\Payment;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        // $this->middleware('admin');
     }
     /**
      * render main admin dashboard
@@ -37,12 +38,12 @@ class AdminController extends Controller
             'couponsActive' => count(DB::table('coupons')->where('is_show', 1)->get()),
 
             // платежи
-            'paymentsTotal' => count(Payment::all()),
-            "payments"      => DB::table('payments')->orderBy('id', 'desc')->simplePaginate(10),
+            // 'paymentsTotal' => /**count(Payment::all())*/ 3,
+            // "payments"      => DB::table('payments')->orderBy('id', 'desc')->simplePaginate(10),
 
             // views
-            'viewsTotal'    => DB::table('accounting_datas')->where('slug', "views")->get()[0]->value,
-            'viewsToday'    => (count(DB::table('views')->where('day', Carbon::now()->toDateString())->get()) > 0) ? DB::table('views')->where('day', Carbon::now()->toDateString())->get()[0]->count : 0,
+            // 'viewsTotal'    => DB::table('accounting_datas')->where('slug', "views")->get()[0]->value,
+            // 'viewsToday'    => (count(DB::table('views')->where('day', Carbon::now()->toDateString())->get()) > 0) ? DB::table('views')->where('day', Carbon::now()->toDateString())->get()[0]->count : 0,
 
         ]);
     }
@@ -178,15 +179,6 @@ class AdminController extends Controller
         ]);
     }
 
-    // types
-
-    public function showTypes()
-    {
-        return view("admin.types", [
-            "types" => \App\CompanyPaymentsType::all(),
-        ]);
-    }
-
     /**
      * [showUnconfirmedCompanies description]
      * @return [type] [description]
@@ -211,7 +203,7 @@ class AdminController extends Controller
 
     /**
      * [showCategories description]
-     * @return view 
+     * @return view
      */
     public function showCategories()
     {
@@ -226,8 +218,9 @@ class AdminController extends Controller
      * @param  Request $request [description]
      * @return [type]           [description]
      */
-    public function searchInSystem(Request $request) {
-        $query = $request['query'];
+    public function searchInSystem(Request $request)
+    {
+        $query  = $request['query'];
         $result = [];
 
         $coupons = DB::table("coupons")->where("title", "like", "$query")->get();

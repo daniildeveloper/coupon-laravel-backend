@@ -41,7 +41,7 @@
             купонов всего
         </span>
     </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    {{-- <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top">
             <i class="fa fa-clock-o">
             </i>
@@ -58,8 +58,8 @@
             </i>
             от 0 платежей
         </span>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    </div> --}}
+    {{-- <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top">
             <i class="fa fa-eye">
             </i>
@@ -75,7 +75,7 @@
             </i>
             {{$viewsToday}} за сегодня
         </span>
-    </div>
+    </div> --}}
 </div>
 <!-- /top tiles -->
 <div class="row">
@@ -291,22 +291,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($payments as $payment)
-                        <tr>
-                            <th scope="row">
-                                {{$payment->id}}
-                            </th>
-                            <td>
-                                {{\App\User::find($payment->user_id)->name}}
-                            </td>
-                            <td>
-                                {{$payment->payment}}
-                            </td>
-                            <td>
-                                {{$payment->created_at}}
-                            </td>
-                        </tr>
-                        @endforeach
+                            {{-- @foreach($payments as $payment)
+                            <tr>
+                                <th scope="row">
+                                    {{$payment->id}}
+                                </th>
+                                <td>
+                                    {{\App\User::find($payment->user_id)->name}}
+                                </td>
+                                <td>
+                                    {{$payment->payment}}
+                                </td>
+                                <td>
+                                    {{$payment->created_at}}
+                                </td>
+                            </tr>
+                            @endforeach --}}
                     </tbody>
                 </table>
             </div>
