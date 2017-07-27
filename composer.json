@@ -4,17 +4,19 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.6.4",
         "andre_487/php_rutils": "^1.2",
         "barryvdh/laravel-debugbar": "^2.4",
         "dosarkz/epay-kazcom": "^1.0",
+        "fintech-fab/qiwi-sdk": "dev-master",
         "guzzlehttp/guzzle": "^6.3",
+        "kolesa-team/qazkom-epay": "*",
         "laravel/framework": "5.3.*",
         "nesbot/carbon": "^1.22",
         "tymon/jwt-auth": "^0.5.12",
-        "unisharp/laravel-filemanager": "^1.8",
-        "fintech-fab/qiwi-sdk": "dev-master"
+        "unisharp/laravel-filemanager": "^1.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

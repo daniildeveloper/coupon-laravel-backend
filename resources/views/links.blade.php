@@ -20,7 +20,7 @@
       <h3>Helpers</h3>
       <ul>
         <li><a href="{{ route('thanks') }}">Спасибо</a></li>
-        <li><a href=""></a></li>
+        <li><a href="{{ route('pay.kkb') }}">Pay kazkom</a></li>
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>

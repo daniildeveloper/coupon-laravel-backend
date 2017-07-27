@@ -209,15 +209,25 @@ Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
  * ================================
  */
 Route::group(['prefix' => 'pay', 'namespace' => 'Payments'], function () {
-    Route::get('/', function () {
-        return view('auth.login');
-    });
+    // Route::get('/', function () {
+    //     return view('auth.login');
+    // });
 
     // qiwi payments
     Route::group(['prefix' => 'qiwi'], function () {
         Route::get('gate', 'QiwiController@checkOrder')->name('pay.qiwi.gateurl');
     });
     // end qiwi payments
+    
+    /**
+     * KKB payments
+     */
+    Route::group(['prefix' => 'kkb'], function () {
+        Route::get('/', 'QazKomController@pay')->name('pay.kkb');
+    });
+    /**
+     * END KKB PAYMENTS
+     */
 });
 /**
  * ================================

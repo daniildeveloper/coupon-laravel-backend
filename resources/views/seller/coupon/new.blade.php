@@ -19,7 +19,7 @@
            </span>
            <input id="thumbnail" class="form-control" type="text" name="preview">
          </div>
-         <img id="holder" style="margin-top:15px;min-height:300px;">
+         <img id="holder" style="margin-top:15px;min -height:300px;">
         </div>
         
         {{-- END LARAVEL FILE MANAGER --}}
