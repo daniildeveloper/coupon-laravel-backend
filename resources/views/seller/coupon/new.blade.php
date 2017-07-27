@@ -30,6 +30,18 @@
             </div>
         </div>
         {{-- end fiel preiew input --}}
+
+        {{-- LARAVEL FILE MANAGER --}}
+        <div class="input-group">
+           <span class="input-group-btn">
+             <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+               <i class="fa fa-picture-o"></i> Choose
+             </a>
+           </span>
+           <input id="thumbnail" class="form-control" type="text" name="filepath">
+         </div>
+         <img id="holder" style="margin-top:15px;max-height:100px;">
+        {{-- END LARAVEL FILE MANAGER --}}
         
         <div class="col-md-12 col-sm-12">
             <div class="form-group col-md-12">
@@ -120,6 +132,7 @@
 @endsection
 
 @section('scripts')
+  <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
   <script src="{{asset("tinymce/tinymce.min.js")}}"></script>
   {{-- <script src="{{ asset("js/moment-with-locales.min.js") }}"></script>
   <script src="{{ asset('bootstrap-material-date-timepicker/js/bootstrap-material-datetimepicker.js') }}"></script> --}}
@@ -129,8 +142,9 @@
             language: "ru",
             language_url: '/langs/ru.js'
           });
-    $('#selectDateTime').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD H:m:s',
-            lang: 'ru'
-          });
+    $('#lfm').filemanager('image');
+    // $('#selectDateTime').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD H:m:s',
+    //         lang: 'ru'
+    //       });
   </script>
 @endsection
