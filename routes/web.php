@@ -116,7 +116,7 @@ Route::get('register-seller', 'SellerController@showRegisterView')->name('seller
 Route::post('register-seller', 'SellerController@register')->name('seller.register');
 
 // Routes group
-Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
+Route::group(['prefix' => 'seller' /**'middleware' => 'auth'*/], function () {
     // seller dashoard. Here is to view all data quickly.
     Route::get('dashboard', 'SellerController@showSellerDashboard')->name('seller.dashboard');
 
@@ -175,9 +175,9 @@ Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
         // TODO: my money
     });
     // end payments
-    
+
     // accounting
-    Route::group(['prefix' => 'accounting'], function() {
+    Route::group(['prefix' => 'accounting'], function () {
         //list with possible exels
         Route::get('/', 'SellerController@showAccountingDataList')->name('accounting');
         // TODO: generate exel with views and buys
@@ -186,13 +186,13 @@ Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
         // TODO: generate exel with all time or selected time views, buys, and sells statistics
     });
     // end accounting
-    
+
     // SELLER CLIENTS
     Route::group(['prefix' => 'clients'], function () {
         Route::get('/', 'SellerController@showClientsList')->name('seller.clients');
     });
     // END SELLER CLIENTS
-    
+
     // TODO: messenger
 
 });
@@ -203,8 +203,7 @@ Route::group(['prefix' => 'seller', /**'middleware' => 'auth'*/], function () {
  * ================================
  */
 
-
- /* ================================
+/* ================================
  *     PAYMENTS
  * ================================
  */
@@ -218,7 +217,7 @@ Route::group(['prefix' => 'pay', 'namespace' => 'Payments'], function () {
         Route::get('gate', 'QiwiController@checkOrder')->name('pay.qiwi.gateurl');
     });
     // end qiwi payments
-    
+
     /**
      * KKB payments
      */
@@ -233,4 +232,110 @@ Route::group(['prefix' => 'pay', 'namespace' => 'Payments'], function () {
  * ================================
  *     END PAYMENTS
  * ================================
+ */
+
+/**
+ * ===============================
+ *     ADMIN
+ * ===============================
+ */
+Route::group([
+    'prefix'     => 'manager',
+    'namespace'  => 'Admin',
+    'middleware' => 'admin',
+], function () {
+    // SHOW ADMIN DASHBOARD
+    Route::get('/', 'AdminController@showDashboard')->name('admin.dashboard');
+
+    Route::group(["prefix" => 'trash'], function () {
+        Route::get("/", "TrashController@showTrash")->name("trash");
+        Route::get("/restore/{id}", 'TrashController@restore')->name("trash.restore");
+        Route::get("/to/{table}/{id}", "TrashController@moveToTrash")->name('trash.moveTo');
+        Route::get("/delete/{id}", "TrashController@delete")->name("trash.delete");
+    });
+
+    Route::group(["prefix" => "faq"], function () {
+        Route::get("/", "FaqController@get")->name("faq.all");
+        Route::get("/edit/{id}", "FaqController@formEdit")->name("faq.edit");
+        Route::get("new", "FaqController@form")->name("faq.new");
+        Route::get("create", "FaqController@create")->name("faq.create");
+        Route::get("update", "FaqController@update")->name("faq.update");
+        Route::get("toggle/{id}", "FaqController@toggleShowInFooter")->name("faq.toggle");
+        Route::get("footerpos", "FaqController@setFooterPos")->name("faq.footerpos");
+    });
+
+    Route::group(["prefix" => "news"], function () {
+        Route::get("/", "NewsController@get")->name("news.all");
+        Route::get("/edit/{id}", "NewsController@formEdit")->name("news.edit");
+        Route::get("new", "NewsController@form")->name("news.new");
+        Route::get("create", "NewsController@create")->name("news.create");
+        Route::get("update", "NewsController@update")->name("news.update");
+    });
+
+    Route::group(["prefix" => "couponcategories"], function () {
+        Route::get("/", "ContentController@showCategories")->name("categories.all");
+        Route::get("/update/{id}", "ContentController@updateCategory")->name("categories.update");
+    });
+
+    Route::group(["prefix" => "settings"], function () {
+        Route::get("/", "SystemSettingController@showAll")->name("setting.all");
+        Route::get("/update", "SystemSettingController@updateSetting")->name("setting.update");
+    });
+
+    Route::group(['prefix' => 'coupon'], function () {
+        Route::get('/', 'AdminController@allCoupons')->name('crud-coupon');
+        Route::get("/unconfirmed", "AdminController@showNewCoupons")->name('coupons-unconfirmed');
+        Route::get('/publish/{id}', "AdminController@publishCoupon")->name('coupon-p');
+        Route::get('/hide/{id}', "AdminController@hideCoupon")->name('coupon-h');
+        Route::get("/{id}", "AdminController@showSingleCoupon")->name("single-coupon");
+        Route::get("/{id}/setPrice", "AdminController@setCouponPrice")->name('coupon-price');
+
+        // создание купонов из админки
+        Route::group(["prefix" => "coupon"], function () {
+            Route::get("showform", "CouponCompanyController@showCouponCreationForm")->name("admin-create-coupon");
+            Route::post("create", "CouponCompanyController@createCoupon")->name("coupon.fromadmin");
+            Route::group(["prefix" => "categories"], function () {
+                Route::get("/", "AdminController@showCategories")->name("admin.categories");
+            });
+        });
+    });
+
+    Route::group(['prefix' => 'company'], function () {
+        Route::group(['prefix' => 'type'], function () {
+            Route::get("/", "CouponCompanyController@showCompanyTypes")->name('companytypes');
+            Route::get("/edit/{id}", "CouponCompanyController@editCompanyType")->name("companytypes.edit");
+            Route::get("new", "CouponCompanyController@newCompanyType")->name('companytypes.new');
+            Route::get("/create", "CouponCompanyController@createCompanyType")->name("companytypes.create");
+            Route::get("/update", "CouponCompanyController@udpateCompanyType")->name("companytypes.update");
+            Route::get("/delete/{id}", "CouponCompanyController@deleteCompanyType")->name("companytypes.delete");
+        });
+        Route::get('/', 'AdminController@allComapanies')->name('crud-company');
+        Route::get("/unconfirmed", "AdminController@showUnconfirmedCompanies")->name("unconfirmed-companies");
+        Route::get("/toFamily/{id}", "AdminController@toTheFamily")->name("to-family");
+        Route::get("/companylist", "CouponCompanyController@getCompaniesForAutoComplete");
+        Route::get('/company/{id}', 'AdminController@showCompanieById')->name('crud-company-single');
+
+    });
+
+    Route::group(['prefix' => 'ref'], function () {
+        Route::get('/', "AdminController@showReferalSettings")->name('crud-ref-setup');
+        Route::get('/all', "AdminController@showReferalList")->name('crud-crud-ref-list');
+        Route::get('/back', "AdminController@showReferalPayList")->name('crud-ref-payments');
+    });
+    Route::get('types', "AdminController@showTypes")->name('type');
+
+    Route::group(['prefix' => 'payments'], function () {
+        Route::get('/', 'PaymentsController@showLast')->name('payments');
+        Route::get('settings', "PaymentsController@showSettings")->name('pay-set');
+        Route::post('settings', "PaymentsController@changeData")->name('pay-change');
+        Route::get("find", "PaymentsController@findPayment")->name("payment.find");
+    });
+
+    Route::group(["prefix" => "topbanner"], function () {
+        Route::get("/", "BannerController@showBannerSettings")->name("banner-top");
+        Route::post("/banner", "BannerController@updateBanner")->name("banner-update");
+    });
+});
+/**
+ *  END ADMIN
  */
