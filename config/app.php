@@ -165,7 +165,9 @@ return [
 
         /*
          * Package Service Providers...
-
+        */
+       Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+       Intervention\Image\ImageServiceProvider::class,
         //
 
         /*
@@ -230,6 +232,8 @@ return [
         'H'            => App\Helper::class,
         // system settings. phones, datas
         'S'            => App\Model\SystemSetting::class,
+        // unisharp filemanager
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
