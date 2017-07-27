@@ -89,8 +89,8 @@
                   
                   
 
-                  <li><a href="{{route("trash")}}"><i class="fa fa-trash"></i>Корзина</a>
-                  </li>
+                 {{--  <li><a href="{{route("trash")}}"><i class="fa fa-trash"></i>Корзина</a>
+                  </li> --}}
 
                   
                 </ul> 
