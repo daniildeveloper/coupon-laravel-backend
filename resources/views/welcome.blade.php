@@ -5,12 +5,19 @@ CouponLand
 @endsection
 
 @section('content')
+
 <div class="container">
+
   <div class="row">
     <div class="col-md-3">
       @include("layouts.sidebar")
     </div>
     <div class="col-md-9">
+      {{-- Coupon categories --}}
+      @if(isset($category_name))
+      <h3>{{ $category_name }}</h3>
+      @endif
+      {{-- end coupon category name --}}
       <div class="gap gap-small"></div>
       <div class="row row-wrap">
         @foreach($products as $product)
@@ -29,7 +36,7 @@ CouponLand
                   </a>
                 </div> --}}
               <header class="product-header">
-                <img style="height: 260px" src="{{$product->image}}" alt="{{$product->title}}" title="{{$product->title}}">
+                <img style="height: 260px" src="{{asset($product->image)}}" alt="{{$product->title}}" title="{{$product->title}}">
                 <div class="product-quick-view">
                   <a class="fa fa-eye" href="c/{{$product->id}}" data-effect="mfp-move-from-top" data-toggle="tooltip" data-placement="top" title="Посмотреть"></a>
                 </div>
@@ -46,14 +53,14 @@ CouponLand
                 <h5 class="product-title">{{$product->title}}</h5>
                 <p class="product-desciption">{!!$product->short_description!!}</p>
                 <div class="product-meta">
-                  <ul class="product-price-list">
+                  {{-- <ul class="product-price-list"> --}}
                     {{-- <li><span class="product-price">500тг</span></li>
                     <li><span class="product-old-price">1000тг</span></li> --}}
                     {{-- <li><span class="product-save">Скидка {{$product->profit_all}}%</span></li> --}}
-                    <li>
-                      <span id="countdown{{ $product->id }}"></span>
-                    </li>
-                  </ul>
+                    {{-- <li> --}}
+                      {{-- <span id="countdown{{ $product->id }}"></span> --}}
+                    {{-- </li> --}}
+                  {{-- </ul> --}}
                   <ul class="product-actions-list">
                     <li><a class="btn btn-sm" href="{{route("shop.to-cart", ["id" => $product->id])}}"><i class="fa fa-shopping-cart"></i> В корзину</a></li>
                     <li><button class="btn btn-sm " data-target="#email" data-toggle="modal">Быстрый заказ</button></li>

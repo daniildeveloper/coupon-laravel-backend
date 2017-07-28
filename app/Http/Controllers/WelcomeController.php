@@ -181,10 +181,10 @@ class WelcomeController extends Controller
      */
     public function showCategorie($cat)
     {
-        $coupons = DB::table("coupons")->where("category_id", $cat)->get();
-        return view("coupon.categorie", [
+        $coupons = DB::table("coupons")->where("coupon_category", $cat)->paginate(30);
+        return view("welcome", [
             "products"          => $coupons,
-            "category_name"     => CouponCategories::find($cat)->name,
+            "category_name"     => CouponsCategory::find($cat)->title,
             "search"            => true,
             "coupon_categories" => $this->coupon_categories,
         ]);
