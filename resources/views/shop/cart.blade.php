@@ -59,9 +59,15 @@
                         {{-- <li><span>Всего:</span><span>{{\Session::get("cart")->totalPrice}} тг</span>
                         </li> --}}
                     </ul>
-                    <form action="" method="POST">
+                    <form action="{{ route('ucheckout') }}" method="POST">
                         {{ csrf_field() }}
-                        <input type="hidden" name="cart" value="{{ serialize(\Session::get('cart')) }}">
+                        <input type="hidden" name="cart" value="{{ base64_encode(serialize(\Session::get('cart'))) }}">
+                        @if(Auth::user() === null)
+                            <input type="text" placeholder="Ваше имя" name="user_name">
+                            <input type="email" placeholder="Ваша почта" name="user_email">
+                        @else
+                            <input type="hidden" value="{{ Auth::user()->email }}" name="user_email">
+                        @endif
                         <button type="submit" class="btn btn-primary btn-lg">Заказать</button>
                     </form>
                 </div>

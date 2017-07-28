@@ -53,6 +53,9 @@ Route::group(["prefix" => "shop"], function () {
             "uses" => "ShoppingCartController@checkout",
             "as"   => "checkout",
         ]);
+
+        Route::post('/ucheckout', 'ShoppingCartController@checkoutUserCart')->name('ucheckout');
+
     });
 });
 

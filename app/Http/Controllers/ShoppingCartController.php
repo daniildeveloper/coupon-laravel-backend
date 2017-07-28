@@ -7,13 +7,13 @@ use App\Company;
 use App\Coupon as Product;
 use App\Deal;
 use App\Order;
-use Epay;
+use App\User;
+use Carbon\Carbon;
 use Epay\Client as KazkomPay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use \Mail;
-use Carbon\Carbon;
 use \DB;
+use \Mail;
 
 class ShoppingCartController extends Controller
 {
@@ -101,7 +101,7 @@ class ShoppingCartController extends Controller
     }
 
     public function createOrderWithoutReg(Request $request, $id)
-    {   
+    {
         $coupon  = count(DB::table('coupons')->where('id', $id)->get()) > 0 ? DB::table('coupons')->where('id', $id)->get()[0] : redirect('/');
         $company = Company::find($coupon->company_id);
 
@@ -115,15 +115,15 @@ class ShoppingCartController extends Controller
         $deal->save();
 
         $data = [
-            'email'      => $request['email'],
-            'coupon'     => Product::find($id),
-            "address"    => $company->seller_address,
-            "company"    => $company->seller_name,
-            "phones" => [
+            'email'   => $request['email'],
+            'coupon'  => Product::find($id),
+            "address" => $company->seller_address,
+            "company" => $company->seller_name,
+            "phones"  => [
                 $company->seller_primary_phone,
-                $company->seller_second_phone
+                $company->seller_second_phone,
             ],
-            'deal'       => $deal,
+            'deal'    => $deal,
         ];
         Mail::send('email.order', $data, function ($message) use ($request, $data) {
             $message->from(env('SUPPORT_EMAIL'), env('SUPPORT_NAME'));
@@ -136,43 +136,6 @@ class ShoppingCartController extends Controller
             $message->priority(3);
         });
         return redirect()->back();
-    }
-
-    public function paySentOrder($user_id = 1, $order_id = 1, $amount = 200)
-    {
-        $regular_pay = Epay::regularPay([
-            'order_id'  => rand(111111111111, 999999999999999),
-            'currency'  => '398',
-            'amount'    => '50',
-            'email'     => 'client@kkb.kz',
-            'hashed'    => true,
-            'reference' => '150218150813',
-        ]);
-
-        $xml          = simplexml_load_string($regular_pay->generateUrl());
-        $xml_to_array = json_decode(json_encode((array) $xml), true);
-
-        // check american express card
-
-        // if (array_key_exists('@attributes', $xml_to_array['error']))
-        // {
-        //     if ($xml_to_array['error']['@attributes']['input'] != null ||
-        //         $xml_to_array['error']['@attributes']['payment'] != null ||
-        //         $xml_to_array['error']['@attributes']['system'] != null
-        //     )
-        //     {
-        //        dd(  $xml_to_array['error']['@attributes']);
-        //     }
-        // }
-
-        $payment_array = $xml_to_array['payment']['@attributes'];
-        dd($payment_array);
-
-        if ($payment_array['message'] == "Approved") {
-            dd($payment_array);
-        }
-
-        dd(false);
     }
 
     public function paySentOrderOld($user_id = 1, $order_id = 1, $amount = 200)
@@ -191,6 +154,68 @@ class ShoppingCartController extends Controller
         $xml = $client->processRequest(time(), $client->getCurrencyId('KZT'), 555);
 
         return view("pay");
+    }
+
+    public function checkoutUserCart(Request $request)
+    {
+        $cart      = $request['cart'];
+        $cart      = unserialize(base64_decode($cart));
+        $userEmail = $request['user_email'];
+
+        // if user isnt registred here at any time
+        // if (Auth::user() === null && count(DB::table('users')->where('email', $request['user_email'])->get()) === 0) {
+        //     // create custom password for user
+        //     $generatedPassword = uniqid();
+
+        //     // register new user
+        //     $user           = new User();
+        //     $user->email    = $userEmail;
+        //     $user->name     = $request['user_name'];
+        //     $user->password = bcrypt($generatedPassword);
+        //     $user->save();
+
+        //     $data = [
+        //         'email'    => $request['email'],
+        //         'password' => $generatedPassword,
+        //     ];
+
+        //     // TODO: create job to send email
+        //     Mail::send('email.welcome', $data, function ($message) use ($request, $data) {
+        //         $message->from(env('SUPPORT_EMAIL'), env('SUPPORT_NAME'));
+        //         $message->sender(env('SUPPORT_EMAIL'), env('SUPPPORT_NAME'));
+
+        //         $message->to($request['email']);
+
+        //         $message->subject('Новая учетная запись');
+
+        //         $message->priority(3);
+
+        //     });
+
+        // }
+        
+        // here from deals 
+        $dealMailingData = [];
+
+        // deserialize
+        foreach ($cart as $key) {
+            $couponId = $key['id'];
+            
+            // create new deal
+            $deal                  = new Deal();
+            $deal->coupon_id       = $id;
+            $deal->company_id      = $company->id;
+            $deal->user_email      = $request['user_email'];
+            $deal->user_code       = rand(10000, 99999);
+            $deal->company_code    = rand(10000, 99999);
+            $deal->expiration_date = Carbon::now()->addWeeks(2);
+            $deal->save();
+
+            $forMailingToUser = array(
+                    'coupon_id' => $id,
+                );
+        }
+        dd($cart);
     }
 
 }
