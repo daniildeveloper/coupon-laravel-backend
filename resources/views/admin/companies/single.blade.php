@@ -25,17 +25,32 @@
         <div class="x_content">
             <div class="col-md-7 col-sm-7 col-xs-12">
                 <div class="product-image">
-                    <img alt="{{$company->name}}" src="{{asset("public/storage/$company->preview_name")}}">
+                    <img alt="{{$company->name}}" src="{{asset("$company->seller_logo")}}">
                     </img>
                 </div>
             </div>
             <div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
                 <h3 class="prod_title">
-                    {{$company->name}}
+                    {{$company->seller_name}}
                 </h3>
                 <p>
-                    {{$company->description}}
+                    {{$company->seller_address}}
                 </p>
+                <p>{{ App\Model\CompanyType::find($company->seller_company_type)->name }}</p>
+                <p>
+                    Основной номер:
+                    <a href="tel:{{ $company->seller_primary_phone }}">{{ $company->seller_primary_phone }}</a>
+                </p>
+                <p>
+                    Добавочный номер:
+                    <a href="tel:{{ $company->seller_primary_phone }}">{{ $company->seller_primary_phone }}</a>
+                </p>
+                <hr>
+                {{-- Confirm data --}}
+                @if($company->confirmed === 0)
+                    <a href="{{ route('to-family', ['id' => $company->id]) }}" class="btn btn-success">Подтвердить данные</a>
+                @endif
+                {{-- end data confirmation --}}
             </div>
             {{-- TODO: coupon show --}}
             {{-- <div class="col-md-12">

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Company;
 use App\Coupon;
-use App\Model\CouponsCategory;
 use App\Http\Controllers\Controller;
+use App\Model\CouponsCategory;
 // use App\Payment;
 use App\User;
 use Carbon\Carbon;
@@ -131,7 +131,7 @@ class AdminController extends Controller
         $data['price']  = $request['price'];
         $data["coupon"] = Coupon::find($id)->title;
         Mail::send('email.pricechangenotification', $data, function ($message) use ($data) {
-            $message->from(env('SUPPORT_EMAIL'), env('SUPPORT_NAME') );
+            $message->from(env('SUPPORT_EMAIL'), env('SUPPORT_NAME'));
             $message->sender(env('SUPPORT_EMAIL'), env('SUPPORT_NAME'));
 
             $message->to($data['email']);

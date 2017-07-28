@@ -85,10 +85,10 @@
                                     {{$type->id}}
                                 </td>
                                 <td>
-                                    {{$type->title}}
+                                    {{$type->name}}
                                 </td>
                                 <td>
-                                    {{$type->description}}
+                                    {!! $type->description !!}
                                 </td>
                                 <td>
                                     <a class="btn btn-success" href="{{route("companytypes.edit",["id"=>$type->id])}}">Редактировать</a>

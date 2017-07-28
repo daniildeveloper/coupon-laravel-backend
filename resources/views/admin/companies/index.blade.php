@@ -100,7 +100,7 @@
                                     {{count(\Illuminate\Support\Facades\DB::table("coupons")->where('company_id', $companie->id)->get())}}
                                 </td>
                                 <td>
-                                    <a class="btn btn-success" href="{{url("backend/company/$companie->id")}}">Посмотреть</a>
+                                    <a class="btn btn-success" href="{{ route('crud-company-single', ['id' => $companie->id]) }}">Посмотреть</a>
                                 </td>
 
                             </tr>

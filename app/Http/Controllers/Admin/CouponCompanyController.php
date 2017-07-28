@@ -4,15 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\ClientsProfitTypes;
 use App\Company;
-use App\CompanyType;
 use App\Coupon;
 use App\CouponCategories;
 use App\Http\Controllers\Controller;
+use App\Model\CompanyType;
 use Carbon\Carbon;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use php_rutils\RUtils;
 
 class CouponCompanyController extends Controller
 {
@@ -107,17 +108,19 @@ class CouponCompanyController extends Controller
         return view("admin.editor", [
             "entity"                       => $q,
             // "previewUrl"                   => "",
-            "title"                        => $q->title . " | Редактировать тип компании",
+            "title"                        => $q->name . " | Редактировать тип компании",
             "route"                        => "companytypes.update",
             "content"                      => $q->description,
-            "additional_input_placeholder" => $q->title,
+            "additional_input_placeholder" => $q->name,
         ]);
     }
     public function udpateCompanyType(Request $request)
     {
         \DB::table("company_types")->where("id", $request->id)->update([
             "description" => $request["text"],
-            "title"       => $request["additional_input"],
+            "name"        => $request["additional_input"],
+            'slug'        => RUtils::translit()->slugify($request["additional_input"]),
+
         ]);
         return redirect()->back();
     }
@@ -135,8 +138,9 @@ class CouponCompanyController extends Controller
     public function createCompanyType(Request $request)
     {
         $q              = new CompanyType();
-        $q->title       = $request["additional_input"];
+        $q->name        = $request["additional_input"];
         $q->description = $request["text"];
+        $q->slug        = RUtils::translit()->slugify($request["additional_input"]);
         $q->save();
         return redirect()->route("companytypes");
     }
