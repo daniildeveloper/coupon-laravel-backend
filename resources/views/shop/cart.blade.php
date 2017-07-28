@@ -56,10 +56,14 @@
                     <ul class="cart-total-list">
                         <li><span>Всего:</span><span>{{\Session::get("cart")->totalQty}}</span>
                         </li>
-                        <li><span>Всего:</span><span>{{\Session::get("cart")->totalPrice}} тг</span>
-                        </li>
+                        {{-- <li><span>Всего:</span><span>{{\Session::get("cart")->totalPrice}} тг</span>
+                        </li> --}}
                     </ul>
-                    <a href="#" class="btn btn-primary btn-lg">Заказать</a>
+                    <form action="" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="cart" value="{{ serialize(\Session::get('cart')) }}">
+                        <button type="submit" class="btn btn-primary btn-lg">Заказать</button>
+                    </form>
                 </div>
             </div>
             <div class="gap"></div>
