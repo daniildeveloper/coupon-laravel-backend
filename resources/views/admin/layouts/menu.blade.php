@@ -51,7 +51,7 @@
                     <ul class="nav child_menu">
                       <li><a href="{{route('payments')}}">Список последних</a></li>
                       {{-- <li><a href="#">Провести платеж</a></li> --}}
-                      <li><a href="{{route('pay-set')}}">Настройки платежей</a></li>
+                      {{-- <li><a href="{{route('pay-set')}}">Настройки платежей</a></li> --}}
                     </ul>
                   </li>
 
@@ -59,8 +59,8 @@
                   {{-- <li>
                     <a href="{{route('type')}}" ><i class="fa fa-money"></i>Предложения</a>
                   </li> --}}
-                  <li><a href="{{route('banner-top')}}" ><i class="fa fa-volume-up"></i>Баннер</a>
-                  </li>
+                  {{-- <li><a href="{{route('banner-top')}}" ><i class="fa fa-volume-up"></i>Баннер</a> --}}
+                  {{-- </li> --}}
                   {{-- <li>
                     <a>
                       <i class="fa fa-sitemap"></i>Номенклатура <span class="fa fa-chevron-down"></span>
