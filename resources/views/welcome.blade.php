@@ -50,6 +50,9 @@ CouponLand
                     {{-- <li><span class="product-price">500тг</span></li>
                     <li><span class="product-old-price">1000тг</span></li> --}}
                     {{-- <li><span class="product-save">Скидка {{$product->profit_all}}%</span></li> --}}
+                    <li>
+                      <span id="countdown{{ $product->id }}"></span>
+                    </li>
                   </ul>
                   <ul class="product-actions-list">
                     <li><a class="btn btn-sm" href="{{route("shop.to-cart", ["id" => $product->id])}}"><i class="fa fa-shopping-cart"></i> В корзину</a></li>
@@ -90,13 +93,15 @@ CouponLand
     </div>
   </div>
 </div>
+{{ $products->links() }}
 
 @endsection
 
 @section("scripts")
-<script src="{{asset("js/jquery.countdown.js")}}">
+{{-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> --}}
+{{-- <script src="{{asset("js/jquery.countdown.min.js")}}">
 </script>
-  {{-- <script>
+  <script>
    window.onload = function() {
       @foreach($products as $product)
         $("#countdown{{$product->id}}").countdown("{{\Carbon\Carbon::parse($product->available_until)->format("Y/m/d")}}", function(event) {

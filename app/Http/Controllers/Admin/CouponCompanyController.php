@@ -71,8 +71,8 @@ class CouponCompanyController extends Controller
     public function inviteCompany(Request $request)
     {
         Mail::send("emails.invite", function ($message) use ($request) {
-            $message->from("aigul@chiki-chiki.kz", 'Айгуль из Чики Чики');
-            $message->sender("aigul@chiki-chiki.kz", 'Айгуль из Чики Чики');
+            $message->from(env('SUPPORT_EMAIL'), env('SUPPORT_NAME'));
+            $message->sender(env('SUPPORT_EMAIL'), env('SUPPORT_NAME'));
 
             $message->to($request['email']);
 

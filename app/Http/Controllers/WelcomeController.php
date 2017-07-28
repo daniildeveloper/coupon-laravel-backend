@@ -53,7 +53,7 @@ class WelcomeController extends Controller
                 ["is_show", 1],
                 ["available_until", '>=', Carbon::now()->timestamp],
             ]
-        )->orderBy('views')->get();
+        )->orderBy('views')->paginate(30);
 
         $alert     = $request->alert ? $request->alert : null;
         $alertType = $request->alertType ? $request->alertType : null;
