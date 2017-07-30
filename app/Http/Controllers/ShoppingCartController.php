@@ -7,7 +7,6 @@ use App\Company;
 use App\Coupon as Product;
 use App\Deal;
 use App\Order;
-use App\User;
 use Carbon\Carbon;
 use Epay\Client as KazkomPay;
 use Illuminate\Http\Request;
@@ -162,6 +161,9 @@ class ShoppingCartController extends Controller
         $cart      = unserialize(base64_decode($cart));
         $userEmail = $request['user_email'];
 
+        // cart in Session contains not only items, so get only items to foreach
+        $cartItems = $cart->items;
+
         // if user isnt registred here at any time
         // if (Auth::user() === null && count(DB::table('users')->where('email', $request['user_email'])->get()) === 0) {
         //     // create custom password for user
@@ -193,28 +195,56 @@ class ShoppingCartController extends Controller
         //     });
 
         // }
-        
-        // here from deals 
+
+        // here from deals
         $dealMailingData = [];
 
         // deserialize
-        foreach ($cart as $key) {
+        foreach ($cartItems as $key) {
             $couponId = $key['id'];
-            
-            // create new deal
-            $deal                  = new Deal();
-            $deal->coupon_id       = $id;
-            $deal->company_id      = $company->id;
-            $deal->user_email      = $request['user_email'];
-            $deal->user_code       = rand(10000, 99999);
-            $deal->company_code    = rand(10000, 99999);
-            $deal->expiration_date = Carbon::now()->addWeeks(2);
-            $deal->save();
 
-            $forMailingToUser = array(
-                    'coupon_id' => $id,
-                );
+            $couponsQty = $key['qty'];
+
+            $company = Company::find(Coupon::find($couponId)->company_id);
+
+            for ($i = 0; $i < $couponsQty; $i++) {
+                // create new deal
+                $deal                  = new Deal();
+                $deal->coupon_id       = $couponId;
+                $deal->company_id      = $company->id;
+                $deal->user_email      = $request['user_email'];
+                $deal->user_code       = rand(10000, 99999);
+                $deal->company_code    = rand(10000, 99999);
+                $deal->expiration_date = Carbon::now()->addWeeks(2);
+                $deal->save();
+
+                // create array with deal data
+                $couponCode                    = [];
+                $couponCode['coupon_id']       = $couponId;
+                $couponCode['user_code']       = $deal->user_code;
+                $couponCode['expiration_date'] = $deal->expiration_date;
+                $couponCode['company_id']      = $company->id;
+
+                // add array to mailing data
+                $dealMailingData[] = $couponCode;
+            }
         }
+
+        $data = array(
+            'userName' => $request['user_name'],
+            'deals' => $dealMailingData,
+        );
+
+        Mail::send('mail.cart', $data, function ($message) {
+            $message->from(env('SUPPORT_EMAIL'), env('SUPPPORT_NAME'));
+            $message->sender(env('SUPPORT_EMAIL'), env('SUPPPORT_NAME'));
+
+            $message->to($request['user_email'], $request['user_name']);
+
+            $message->subject('Заказ с ' . env('APP_NAME'));
+
+            $message->priority(3);
+        });
         dd($cart);
     }
 
